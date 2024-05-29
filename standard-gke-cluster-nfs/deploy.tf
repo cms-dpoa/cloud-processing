@@ -2,6 +2,9 @@ resource "kubernetes_namespace" "namespace1" {
   metadata {
     name = "argo"
   }
+  depends_on = [
+    google_container_node_pool.cluster1_nodes
+  ]
 }
 
 //  001-nfs-server
