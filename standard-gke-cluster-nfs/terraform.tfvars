@@ -1,5 +1,5 @@
-project_id          = "tutorials-403317"
-region              = "europe-west4-a"
-name                = "3"
+project_id          = "<PROJECT_ID>"
+region              = "<REGION>"
+name                = "<NAME>"
 gke_num_nodes       = 6
 gke_machine_type    = "e2-standard-4"
