@@ -7,7 +7,7 @@ spec:
   volumes:
   - name: task-pv-storage
     persistentVolumeClaim:
-      claimName: nfs-3
+      claimName: nfs-1
 
   arguments:
     parameters:
