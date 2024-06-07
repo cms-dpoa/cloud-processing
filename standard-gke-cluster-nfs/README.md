@@ -100,7 +100,7 @@ The `argo` subdirectory has these example workflows:
 - argo_pf_start.yaml: runs 6 parallel jobs with resource requests so that there will be only one job on each node. Can be used to make sure that the container image is pulled to each node and to monitor the resource needs before launching the production.
 - argo_pfnano_nomerge_single.yaml: an example workflow with 24 parallel jobs.
 
-Submit the jobs with
+Submit the jobs with this command:
 
 
 
