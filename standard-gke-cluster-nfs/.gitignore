@@ -36,3 +36,7 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Ignore service account files
+cms_service_acc.json
+cms-getting-started-8762cf99ee85.jsonZone.Identifier

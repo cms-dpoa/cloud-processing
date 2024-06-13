@@ -12,6 +12,7 @@ terraform {
 }
 
 provider "google" {
+  credentials = file("cms_service_acc.json")
   project = var.project_id
   region  = var.region
 }
