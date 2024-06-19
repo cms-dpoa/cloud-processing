@@ -3,7 +3,7 @@ resource "kubernetes_namespace" "namespace1" {
     name = "argo"
   }
   depends_on = [
-    google_container_node_pool.cluster1_nodes
+  google_container_node_pool.cluster1_nodes
   ]
 }
 
