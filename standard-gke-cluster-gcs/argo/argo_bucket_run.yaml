@@ -20,7 +20,7 @@ spec:
     - name: nJobs
       value: 24
     - name: bucket
-      value: <bucket-name>
+      value: toms-bucket1234
 
   templates:
   - name: cms-od-example
