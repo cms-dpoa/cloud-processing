@@ -1,0 +1,267 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: pfnano-process-
+spec:
+  entrypoint: cms-od-example
+  # volumes:
+  # - name: task-pv-storage
+  #   persistentVolumeClaim:
+  #     claimName: nfs-3
+
+  arguments:
+    parameters:
+    - name: startFile                                  
+      value: 1
+    - name: nEvents                               
+      value: 1000
+    - name: recid
+      value: 0
+    - name: nJobs
+      value: 3
+    - name: bucket
+      value: <bucket-name>
+    
+
+  templates:
+  - name: cms-od-example
+    inputs:
+      parameters:
+      - name: startFile
+      - name: nEvents
+      - name: recid
+      - name: nJobs
+      - name: bucket
+    dag:
+      tasks:
+
+      - name: get-metadata
+        template: get-metadata-template
+        arguments:
+         parameters:
+          - name: recid
+            value: "{{inputs.parameters.recid}}"
+          - name: bucket
+            value: "{{inputs.parameters.bucket}}"
+          - name: dataType
+            value: "{{outputs.parameters.dataType}}"
+
+      - name: joblist
+        dependencies: [get-metadata]
+        template: joblist-template
+        arguments:
+         parameters:
+          - name: startFile
+            value: "{{inputs.parameters.startFile}}"
+          - name: nJobs
+            value: "{{inputs.parameters.nJobs}}"
+          - name: nEvents
+            value: "{{inputs.parameters.nEvents}}"
+          - name: totFiles
+            value: "{{tasks.get-metadata.outputs.result}}"
+
+      - name: runpfnano
+        dependencies: [joblist]
+        template: runpfnano-template
+        arguments:
+         parameters:
+          - name: recid
+            value: "{{inputs.parameters.recid}}"
+          - name: bucket
+            value: "{{inputs.parameters.bucket}}"
+          - name: dataType
+            value: "{{tasks.get-metadata.outputs.parameters.dataType}}"
+          - name: it
+            value: "{{item.it}}"
+          - name: firstFile
+            value: "{{item.firstfile}}"
+          - name: lastFile
+            value: "{{item.lastfile}}" 
+          - name: eventsInJob
+            value: "{{item.eventsinjob}}"
+        withParam: "{{tasks.joblist.outputs.result}}"
+      
+      - name: plot
+        dependencies: [runpfnano]
+        template: plot-template
+        arguments:
+         parameters:
+          - name: bucket
+            value: "{{inputs.parameters.bucket}}"
+
+  # Get the metadata of the dataset
+  # Accidentally showing three different ways of passing parameters/files btw the steps
+  # - the full list of files: write it to a file on the common disk mounted on /mnt/vol
+  # - the type of data: write it to the step's ouput parameter "{{tasks.get-metadata.outputs.parameters.dataType}}#   (through a temporary file /tmp/type.txt)
+  # - the total number of files which is the stdout output of this step and goes to {{tasks.get-metadata.outputs.result}}
+  #
+  # For now, cernopendata-client is not used as the recid does not exist yet
+  # - Temporarily: Type and n files hardcoded here, get the listing from the repository
+  - name: get-metadata-template
+    inputs:
+      parameters:
+      - name: recid
+      - name: bucket
+    outputs:
+      parameters:
+      - name: dataType
+        valueFrom:
+          default: "default"
+          path: /tmp/type.txt
+      artifacts:
+      - name: filelist
+        path: bucket
+        gcs:
+          bucket: "{{inputs.parameters.bucket}}"
+          key: pfnano/files_{{inputs.parameters.recid}}.txt
+    script:
+      image: cernopendata/cernopendata-client
+      command: [bash]
+      source: |
+        #cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd > /mnt/vol/files_{{inputs.parameters.recid}}.txt;
+        #cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary > /tmp/type.txt 
+        #cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files
+        mkdir bucket
+        curl -s -o bucket/files_{{inputs.parameters.recid}}.txt https://raw.githubusercontent.com/cms-opendata-analyses/PFNanoProducerTool/master/cloud/filelist-temp.txt
+        echo Collision > /tmp/type.txt
+        echo 1236
+
+  # Generate the iterator list for the scatter step
+  # Compute the number of events and files for each step
+  # Write out the list with first and last filenumbers and the numebr of events to be taken as the input of the following steps
+  # (see {{tasks.joblist.outputs.result}} as "withParam" in runpfnano-template)
+  - name: joblist-template
+    inputs:
+      parameters:
+      - name: nJobs
+      - name: nEvents
+      - name: startFile
+      - name: totFiles
+    script:
+      image: python:alpine3.6
+      command: [python]
+      source: |
+        import json
+        import sys
+        start = {{inputs.parameters.startFile}}
+        nJobs = {{inputs.parameters.nJobs}}
+        nEvents = {{inputs.parameters.nEvents}}
+        totFiles = {{inputs.parameters.totFiles}}
+        filesInJob = int(totFiles/nJobs)
+        modFiles = totFiles % nJobs
+        eventsInJob = int(nEvents/nJobs)
+        modEvents = nEvents % nJobs
+        itlist = [i for i in range(1, nJobs+1)]
+        dictlist = []
+        for i in itlist:
+          first = start+(i-1)*filesInJob
+          last = first + filesInJob - 1
+          adict = { "it": i, 
+                    "firstfile": first, 
+                    "lastfile":  last,
+                    "eventsinjob": eventsInJob}
+          if i == nJobs:            
+            adict = { "it": i, 
+                      "firstfile": first, 
+                      "lastfile":  last + modFiles,
+                      "eventsinjob": eventsInJob + modEvents}
+          dictlist.append(adict)
+        json.dump(dictlist, sys.stdout)
+        
+  # Run the CMSSW step
+  # This iterates over the list that it gets as "withParam"
+  - name: runpfnano-template
+    inputs:
+      parameters:
+      - name: it
+      - name: firstFile
+      - name: lastFile
+      - name: recid
+      - name: bucket
+      - name: dataType
+      - name: eventsInJob
+      artifacts:
+      - name: bucket-input
+        path: /code/filelist
+        gcs:
+          bucket: "{{inputs.parameters.bucket}}"
+          key: pfnano/files_{{inputs.parameters.recid}}.txt
+    outputs:
+      artifacts:
+      - name: filelist
+        path: /code/scatter
+        archive:
+          none: {}
+        gcs:
+          bucket: "{{inputs.parameters.bucket}}"
+          key: pfnano/scatter/
+    script: 
+      image: ghcr.io/katilp/pfnano-image-build:main
+      command: [bash]
+      source: | 
+        
+        # sudo chown $USER /mnt/vol
+        mkdir /code/scatter
+        source /opt/cms/entrypoint.sh
+        eval `scramv1 runtime -sh`
+        # git clone https://github.com/cms-opendata-analyses/PFNanoProducerTool.git PhysicsTools/PFNano
+        cd /code/CMSSW_10_6_30/src/PhysicsTools/PFNano
+        # scram b
+
+        it="{{inputs.parameters.it}}"
+        eventsInJob="{{inputs.parameters.eventsInJob}}"
+        dataType="{{inputs.parameters.dataType}}"
+        echo Datatype $dataType
+        isData=False
+        if  echo $dataType | grep Collision ; then isData=True; fi
+
+        firstFile="{{inputs.parameters.firstFile}}"
+        lastFile="{{inputs.parameters.lastFile}}"
+        echo firstFile $firstFile
+        echo lastFile $lastFile
+
+        sed -i '/process.options.num/s/^/#/g' pfnano_data_2016UL_OpenData_cloud.py
+        sed -i "/from Configuration.AlCa.GlobalTag import GlobalTag/a process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/106X_dataRun2_v37.db')" pfnano_data_2016UL_OpenData_cloud.py
+        cmsRun pfnano_data_2016UL_OpenData_cloud.py $firstFile $lastFile '"/code/filelist/files_{{inputs.parameters.recid}}.txt"' $eventsInJob
+        
+        mv nano_data2016.root /code/scatter/pfnanooutput$it.root
+
+      resources:
+        requests:
+          cpu: 800m
+          ephemeral-storage: "30Gi"  
+
+  # prepare some histograms to check the output content
+  # the files are not merged, they are "chained" for ROOT
+  - name: plot-template
+    
+    inputs:
+      parameters:
+      - name: bucket
+      artifacts:
+      - name: bucket-input
+        path: /code/scatter
+        gcs:
+          bucket: "{{inputs.parameters.bucket}}"
+          key: pfnano/scatter
+    outputs:
+      artifacts:
+      - name: plots
+        path: /code/plots
+        archive:
+          none: {}
+        gcs:
+          bucket: "{{inputs.parameters.bucket}}"
+          key: pfnano/plots/
+    script:
+      image: rootproject/root:latest
+      command: [bash]
+      source: | 
+        ls -l /code/scatter
+        curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/makechain.sh
+        curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/pfplots.C
+        source makechain.sh "/code/scatter/*.root" > mychain.C
+        root -b -l -q mychain.C pfplots.C
+        mkdir /code/plots
+        mv *.png /code/plots
+        

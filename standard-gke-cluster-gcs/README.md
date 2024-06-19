@@ -34,8 +34,13 @@ Clone the code using ssh ([generate the ssh key](https://docs.github.com/en/auth
 
 ```
 git clone git@github.com:cms-dpoa/cloud-processing.git
-cd cloud-processing/standard-gke-cluster-nfs
+cd cloud-processing/standard-gke-cluster-gcs
 ```
+
+### Create the bucket
+
+WIP: complete once tested
+
 
 ### Create the cluster
 
@@ -97,11 +102,10 @@ Install the argo workflows CLI following the instructions in https://github.com/
 
 The `argo` subdirectory has these example workflows:
 
-- argo_pf_start.yaml: runs 6 parallel jobs with resource requests so that there will be only one job on each node. Can be used to make sure that the container image is pulled to each node and to monitor the resource needs before launching the production.
-- argo_pfnano_nomerge_single.yaml: an example workflow with 24 parallel jobs.
+- argo_bucket_start.yaml: runs 6 parallel jobs with resource requests so that there will be only one job on each node. Can be used to make sure that the container image is pulled to each node and to monitor the resource needs before launching the production.
+- argo_bucket_run.yaml: an example workflow with 24 parallel jobs.
 
-Submit the jobs with this command:
-
+Change the bucket name in the workflow file to correspond to the bucket in use.
 
 
 ### Destroy the resource
@@ -111,6 +115,7 @@ Destroy resources with
 ```
 terraform destroy
 ```
+
 
 
 
