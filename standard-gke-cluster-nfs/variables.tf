@@ -36,3 +36,6 @@ variable "name" {
   description = "Cluster name"
 }
 
+variable "service_acc" {
+  description = "service account file"
+}
