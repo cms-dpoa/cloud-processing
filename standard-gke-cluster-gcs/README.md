@@ -44,7 +44,27 @@ WIP: complete once tested
 
 ### Create the cluster
 
-Set `project_id` and `region` in `terraform.tfvars` to the desired values.
+Set `project_id`, `region` and `name` in `terraform.tfvars` to the desired values.
+It might be necessary to specify a zone, rather than a region for the `region`-variable.
+See regions and zones here: https://cloud.google.com/compute/docs/regions-zones
+
+The `name`-variable will be used to set the name of the gke cluster and other resources as in the following example: 
+
+```
+"cluster-<NAME>"
+```
+
+In the argo-workflow
+
+Set the bucket `value` in the .yaml file(s) according to the name of the storage bucket that should be used for storing the processing outputs.
+The bucket has to be created separately and is not included in the provided terraform deployments.
+If using gcloud CLI, buckets can be created as following:
+
+```
+gcloud storage buckets create gs://<BUCKET_NAME> --location=<BUCKET_LOCATION>
+```
+
+More information found here: https://cloud.google.com/storage/docs/creating-buckets#storage-create-bucket-cli
 
 Initialize terraform:
 

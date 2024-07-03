@@ -20,7 +20,8 @@ spec:
     - name: nJobs
       value: 3
     - name: bucket
-      value: toms-bucket1234
+      #FIXME (enter name of cloud storage bucket for storing outputs)
+      value: <BUCKET_NAME>
     
 
   templates:
