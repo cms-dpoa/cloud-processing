@@ -4,10 +4,6 @@ metadata:
   generateName: pfnano-process-
 spec:
   entrypoint: cms-od-example
-  # volumes:
-  # - name: task-pv-storage
-  #   persistentVolumeClaim:
-  #     claimName: nfs-3
 
   arguments:
     parameters:
@@ -16,11 +12,14 @@ spec:
     - name: nEvents                               
       value: 1000
     - name: recid
-      value: "https://opendata.cern.ch/record/24117"
+      #FIXME
+      # Enter recid (record id) of the dataset to be processed
+      value: <RECID>
     - name: nJobs
       value: 3
     - name: bucket
-      value: toms-bucket1234
+      #FIXME (enter name of cloud storage bucket for storing outputs)
+      value: <BUCKET_NAME>
     
 
   templates:
@@ -118,10 +117,10 @@ spec:
       image: cernopendata/cernopendata-client
       command: [bash]
       source: |
-        cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd > /mnt/vol/files_{{inputs.parameters.recid}}.txt;
+        mkdir bucket
+        cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd > bucket/files_{{inputs.parameters.recid}}.txt;
         cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary > /tmp/type.txt 
         cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files
-        #mkdir bucket
         #curl -s -o bucket/files_{{inputs.parameters.recid}}.txt https://raw.githubusercontent.com/cms-opendata-analyses/PFNanoProducerTool/master/cloud/filelist-temp.txt
         #echo Collision > /tmp/type.txt
         #echo 1236
@@ -264,4 +263,3 @@ spec:
         root -b -l -q mychain.C pfplots.C
         mkdir /code/plots
         mv *.png /code/plots
-        

@@ -16,11 +16,14 @@ spec:
     - name: nEvents                               
       value: 250000
     - name: recid
-      value: 0
+      #FIXME
+      # Enter recid (record id) of the dataset to be processed
+      value: <RECID>
     - name: nJobs
       value: 24
     - name: bucket
-      value: toms-bucket1234
+      #FIXME (enter name of cloud storage bucket for storing outputs)
+      value: <BUCKET_NAME>
 
 
   templates:
@@ -118,16 +121,18 @@ spec:
       image: cernopendata/cernopendata-client
       command: [bash]
       source: |
-        #cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd > /mnt/vol/files_{{inputs.parameters.recid}}.txt;
-        #cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary > /tmp/type.txt 
-        #cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files
         mkdir bucket
-        curl -s -o bucket/files_{{inputs.parameters.recid}}.txt https://raw.githubusercontent.com/cms-opendata-analyses/PFNanoProducerTool/master/cloud/filelist-temp.txt
+        cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd > bucket/files_{{inputs.parameters.recid}}.txt;
+        cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary > /tmp/type.txt 
+        cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files
+        
+        #curl -s -o bucket/files_{{inputs.parameters.recid}}.txt https://raw.githubusercontent.com/cms-opendata-analyses/PFNanoProducerTool/master/cloud/filelist-temp.txt
         cat bucket/files_{{inputs.parameters.recid}}.txt | head -24 > bucket/files_tmp.txt
         mv bucket/files_tmp.txt bucket/files_{{inputs.parameters.recid}}.txt
-        echo Collision > /tmp/type.txt
+        #echo Collision > /tmp/type.txt
         #echo 1236
-        echo 24
+        #echo 24
+
 
   # Generate the iterator list for the scatter step
   # Compute the number of events and files for each step

@@ -39,7 +39,14 @@ cd cloud-processing/standard-gke-cluster-gcs
 
 ### Create the bucket
 
-WIP: complete once tested
+The bucket has to be created separately since it is not included in the terraform deployments.
+If using gcloud CLI, buckets can be created as following:
+
+```
+gcloud storage buckets create gs://<BUCKET_NAME> --location=<BUCKET_LOCATION>
+```
+
+More information can be found here: https://cloud.google.com/storage/docs/creating-buckets#storage-create-bucket-cli
 
 
 ### Create the cluster
@@ -53,18 +60,6 @@ The `name`-variable will be used to set the name of the gke cluster and other re
 ```
 "cluster-<NAME>"
 ```
-
-In the argo-workflow
-
-Set the bucket `value` in the .yaml file(s) according to the name of the storage bucket that should be used for storing the processing outputs.
-The bucket has to be created separately and is not included in the provided terraform deployments.
-If using gcloud CLI, buckets can be created as following:
-
-```
-gcloud storage buckets create gs://<BUCKET_NAME> --location=<BUCKET_LOCATION>
-```
-
-More information found here: https://cloud.google.com/storage/docs/creating-buckets#storage-create-bucket-cli
 
 Initialize terraform:
 
@@ -92,7 +87,7 @@ Connect to the cluster with
 gcloud container clusters get-credentials <CLUSTER_NAME> --region <REGION> --project <PROJECT_ID>
 ```
 
-The cluster name is `cluster-<N>` where `<N>` is `name` as defined in `terraform.tfvars`.
+The cluster name is `cluster-<NAME>` where `<NAME>` is `name` as defined in `terraform.tfvars`.
 
 Use `kubectl` to inspect the cluster, e.g.
 
@@ -126,7 +121,12 @@ The `argo` subdirectory has these example workflows:
 - argo_bucket_run.yaml: an example workflow with 24 parallel jobs.
 
 Change the bucket name in the workflow file to correspond to the bucket in use.
+In other words, set the bucket `value` in the .yaml file(s) according to the name of the storage bucket (`<BUCKET_NAME>`) that was created earlier for storing the processing outputs.
 
+Submit the job with this command after changing the filename to the desired workflow file:
+```
+argo submit argo_bucket_start.yaml -n argo 
+```
 
 ### Destroy the resource
 

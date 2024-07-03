@@ -43,17 +43,13 @@ Set `project_id`, `region`, `name` and `service_acc` in `terraform.tfvars` to th
 It might be necessary to specify a zone, rather than a region for the `region`-variable.
 See regions and zones here: https://cloud.google.com/compute/docs/regions-zones
 
-The `name`-variable will be used to set the name of the gke cluster and other resources as following: 
+The `name`-variable will be used to set the name of the gke cluster and other resources as in the following example: 
+
 ```
 "cluster-<NAME>"
 ```
 
 `service_acc` specifies the filename of a service account .json-file to ensure valid permissions for creating cloud resources.
-
-In the argo-workflow
-
-Set the `claimName` in the .yaml file(s) according to the name of the nfs-disk that was deployed via terraform.
-It should be in the format `nfs-<name>`, where `<name>` refers to the name given in `terraform.tfvars`.
 
 Initialize terraform:
 
@@ -114,12 +110,13 @@ The `argo` subdirectory has these example workflows:
 - argo_pf_start.yaml: runs 6 parallel jobs with resource requests so that there will be only one job on each node. Can be used to make sure that the container image is pulled to each node and to monitor the resource needs before launching the production.
 - argo_pfnano_nomerge_single.yaml: an example workflow with 24 parallel jobs.
 
+Set the `claimName` in the .yaml file(s) according to the name of the nfs-disk that was deployed via terraform.
+It should be in the format `nfs-<name>`, where `<name>` refers to the name given in `terraform.tfvars`.
+
 Submit the job with this command after changing the filename to the desired workflow file:
 ```
 argo submit argo_pf_start.yaml -n argo 
 ```
-
-
 
 ### Destroy the resource
 
