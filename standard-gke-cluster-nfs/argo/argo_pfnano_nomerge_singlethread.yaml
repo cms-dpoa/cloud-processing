@@ -3,11 +3,13 @@ kind: Workflow
 metadata:
   generateName: pfnano-process-
 spec:
+  serviceAccountName: argo
   entrypoint: cms-od-example
   volumes:
   - name: task-pv-storage
     persistentVolumeClaim:
-      claimName: nfs-1
+      #FIXME
+      claimName: <NFS_DISK_NAME>
 
   arguments:
     parameters:

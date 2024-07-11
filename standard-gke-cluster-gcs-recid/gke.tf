@@ -1,3 +1,11 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+# resource "google_service_account" "default" {
+#   account_id   = "service-account-id"
+#   display_name = "Service Account"
+# }
+
 data "google_client_config" "default" {}
 
 resource "google_container_cluster" "cluster1" {
@@ -28,11 +36,4 @@ resource "google_container_node_pool" "cluster1_nodes" {
       env = var.project_id
     }
   }
-}
-
-resource "google_compute_disk" "default" {
-  name = "gce-nfs-disk-${var.name}"
-  type = "pd-standard"
-  size = var.persistent_disk_size
-  zone  = var.region
 }

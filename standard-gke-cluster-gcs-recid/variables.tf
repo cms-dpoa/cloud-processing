@@ -21,21 +21,8 @@ variable "gke_node_disk_size" {
   description = "GKE node disk size"
 }
 
-variable "persistent_disk_size" {
-  default     = 100
-  description = "Persistent disk size"
-}
-
-variable "persistent_claim_storage_request" {
-  default     = "100Gi"
-  description = "Persistent claim storage request"
-}
-
 variable "name" {
   default     = "1"
   description = "Cluster name"
 }
 
-variable "service_acc" {
-  description = "service account file"
-}
