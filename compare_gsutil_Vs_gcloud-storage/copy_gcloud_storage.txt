@@ -1,0 +1,83 @@
+subash@MSI:/mnt/c/SUBASH/G-CLOUD/BUCKET$ ./download_script.sh
+STARTING COPYING USING GCLOUD STORAGE
+Copying gs://bucket-europe-west9-paris/200.txt to file://./200.txt
+  Completed files 1/1 | 200.0MiB/200.0MiB | 10.7MiB/s
+
+Average throughput: 10.8MiB/s
+
+real    0m23.711s
+user    0m2.306s
+sys     0m0.998s
+Copying gs://bucket-europe-west9-paris/300.txt to file://./300.txt
+  Completed files 1/1 | 300.0MiB/300.0MiB | 11.1MiB/s
+
+Average throughput: 11.1MiB/s
+
+real    0m33.574s
+user    0m2.958s
+sys     0m1.431s
+Copying gs://bucket-europe-west9-paris/512.txt to file://./512.txt
+  Completed files 1/1 | 512.0MiB/512.0MiB | 11.5MiB/s
+
+Average throughput: 10.9MiB/s
+
+real    0m51.689s
+user    0m3.863s
+sys     0m2.208s
+Copying gs://bucket-europe-west9-paris/700.txt to file://./700.txt
+  Completed files 1/1 | 700.0MiB/700.0MiB | 11.0MiB/s
+
+Average throughput: 10.8MiB/s
+
+real    1m10.569s
+user    0m5.736s
+sys     0m3.201s
+Copying gs://bucket-europe-west9-paris/1GB.zip to file://./1GB.zip
+  Completed files 1/1 | 1.0GiB/1.0GiB | 11.1MiB/s
+
+Average throughput: 8.2MiB/s
+
+real    2m10.469s
+user    0m9.193s
+sys     0m4.870s
+Copying gs://bucket-europe-west9-paris/1_5GB/1GB.zip to file://./1_5GB/1GB.zip
+Copying gs://bucket-europe-west9-paris/1_5GB/512MB.zip.crdownload to file://./1_5GB/512MB.zip.crdownload
+  Completed files 2/2 | 1.5GiB/1.5GiB | 9.8MiB/s
+
+Average throughput: 10.5MiB/s
+
+real    2m34.729s
+user    0m11.141s
+sys     0m6.369s
+Copying gs://bucket-europe-west9-paris/2GB/1GB.zip to file://./2GB/1GB.zip
+Copying gs://bucket-europe-west9-paris/2GB/1GB/1GB.zip to file://./2GB/1GB/1GB.zip
+  Completed files 2/2 | 2.0GiB/2.0GiB | 10.4MiB/s
+
+Average throughput: 10.8MiB/s
+
+real    3m15.154s
+user    0m12.736s
+sys     0m7.642s
+Copying gs://bucket-europe-west9-paris/2_5GB/2GB/1GB.zip to file://./2_5GB/2GB/1GB.zip
+Copying gs://bucket-europe-west9-paris/2_5GB/2GB/1GB/1GB.zip to file://./2_5GB/2GB/1GB/1GB.zip
+Copying gs://bucket-europe-west9-paris/2_5GB/512MB.zip.crdownload to file://./2_5GB/512MB.zip.crdownload
+  Completed files 3/3 | 2.5GiB/2.5GiB | 10.9MiB/s
+
+Average throughput: 10.9MiB/s
+
+real    4m4.881s
+user    0m16.969s
+sys     0m10.345s
+Copying gs://bucket-europe-west9-paris/5GB/1GB/1GB.zip to file://./5GB/1GB/1GB.zip
+Copying gs://bucket-europe-west9-paris/5GB/2GB/1GB.zip to file://./5GB/2GB/1GB.zip
+Copying gs://bucket-europe-west9-paris/5GB/2GB/1GB/1GB.zip to file://./5GB/2GB/1GB/1GB.zip
+Copying gs://bucket-europe-west9-paris/5GB/2GB/2GB/1GB.zip to file://./5GB/2GB/2GB/1GB.zip
+Copying gs://bucket-europe-west9-paris/5GB/2GB/2GB/1GB/1GB.zip to file://./5GB/2GB/2GB/1GB/1GB.zip
+  Completed files 5/5 | 5.0GiB/5.0GiB | 11.1MiB/s
+
+Average throughput: 10.9MiB/s
+
+real    7m55.030s
+user    0m43.599s
+sys     0m21.106s
+subash@MSI:/mnt/c/SUBASH/G-CLOUD/BUCKET$
