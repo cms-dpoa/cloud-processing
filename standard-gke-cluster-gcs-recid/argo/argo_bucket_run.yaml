@@ -127,8 +127,8 @@ spec:
         cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files
         
         #curl -s -o bucket/files_{{inputs.parameters.recid}}.txt https://raw.githubusercontent.com/cms-opendata-analyses/PFNanoProducerTool/master/cloud/filelist-temp.txt
-        cat bucket/files_{{inputs.parameters.recid}}.txt | head -24 > bucket/files_tmp.txt
-        mv bucket/files_tmp.txt bucket/files_{{inputs.parameters.recid}}.txt
+        #cat bucket/files_{{inputs.parameters.recid}}.txt | head -24 > bucket/files_tmp.txt
+        #mv bucket/files_tmp.txt bucket/files_{{inputs.parameters.recid}}.txt
         #echo Collision > /tmp/type.txt
         #echo 1236
         #echo 24
