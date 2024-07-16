@@ -123,6 +123,10 @@ The `argo` subdirectory has these example workflows:
 Change the bucket name in the workflow file to correspond to the bucket in use.
 In other words, set the bucket `value` in the .yaml file(s) according to the name of the storage bucket (`<BUCKET_NAME>`) that was created earlier for storing the processing outputs.
 
+Furthermore, the MiniAOD dataset that is to be processed is determined by its recid (record id). The placeholder `<RECID>` in the .yaml file(s) needs to be updated with the chosen recid value.
+The datasets with their recids can be found on `https://opendata.cern.ch/`.
+The recid is the number in the end of the url, so the following dataset: `https://opendata.cern.ch/record/30549` has the recid `30549`.
+
 Submit the job with this command after changing the filename to the desired workflow file:
 ```
 argo submit argo_bucket_start.yaml -n argo 
