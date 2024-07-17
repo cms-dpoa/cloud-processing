@@ -1,0 +1,61 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Creating the DataFrame
+data = {
+    'File Size (MiB)': [200, 300, 512, 700, 1024, 1536, 2048, 2560, 5120, 7680, 10240],
+    'Download Time (s)': [20.219, 32.020, 49.162, 67.144, 97.556, 144.417, 193.086, 238.967, 477.123, 718.011, 955.075]
+}
+
+df = pd.DataFrame(data)
+
+# Plotting the data
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df, x='Download Time (s)', y='File Size (MiB)', s=100)
+plt.title('File Size vs. Download Time(europe-north1-finland)')
+plt.xlabel('Download Time (s)')
+plt.ylabel('File Size (MiB)')
+plt.grid(True)
+plt.show()
+
+
+***********************************************************************************************************************************************
+
+# Creating the DataFrame
+data = {
+    'File Size (MiB)': [200, 300, 512, 700, 1024, 1536, 2048, 2560, 5120, 7680, 10240],
+    'Download Time (s)': [24.068, 31.560, 53.296, 67.797, 97.912, 149.929, 193.913, 247.625, 487.721, 719.214, 945.851]
+}
+
+df = pd.DataFrame(data)
+
+# Plotting the data
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df, x='Download Time (s)', y='File Size (MiB)', s=100)
+plt.title('File Size vs. Download Time (europe-southwest1-madrid)')
+plt.xlabel('Download Time (s)')
+plt.ylabel('File Size (MiB)')
+plt.grid(True)
+plt.show()
+
+
+
+***********************************************************************************************************************************************
+
+# Creating the DataFrame for europe-west1-belgium
+data_belgium = {
+    'File Size (MiB)': [200, 300, 512, 700, 1024, 1536, 2048, 2560, 5120, 7680, 10240],
+    'Download Time (s)': [22.671, 30.449, 49.600, 67.140, 98.020, 146.198, 192.944, 240.375, 478.395, 708.823, 948.462]
+}
+
+df_belgium = pd.DataFrame(data_belgium)
+
+# Plotting the data
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df_belgium, x='Download Time (s)', y='File Size (MiB)', s=100)
+plt.title('File Size vs. Download Time (europe-west1-belgium)')
+plt.xlabel('Download Time (s)')
+plt.ylabel('File Size (MiB)')
+plt.grid(True)
+plt.show()
