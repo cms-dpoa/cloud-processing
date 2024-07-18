@@ -1,0 +1,17 @@
+subash@MSI:/mnt/c/SUBASH/G-CLOUD/gke-nfs-cluster$ ./nfs_download_script.sh
+tar: Removing leading `/' from member names                                                                       ]
+78.0  B 0:00:37 [2.05  B/s] [   <=>                                                                               ]
+tar: Removing leading `/' from member names                                                                       ]
+78.0  B 0:01:43 [ 768miB/s] [   <=>                                                                               ]
+tar: Removing leading `/' from member names                                                                       ]
+78.0  B 0:03:28 [ 382miB/s] [   <=>                                                                               ]
+tar: Removing leading `/' from member names                                                                       ]
+44.0  B 0:02:48 [ 267miB/s] [   <=>                                                                               ]
+tar: Removing leading `/' from member names                                                                       ]
+78.0  B 0:03:19 [ 401miB/s] [   <=>                                                                               ]
+tar: Removing leading `/' from member names                                                                       ]
+44.0  B 0:07:15 [ 103miB/s] [   <=>                                                                               ]
+tar: Removing leading `/' from member names                                                                       ]
+78.0  B 0:26:44 [49.8miB/s] [   <=>                                                                               ]
+subash@MSI:/mnt/c/SUBASH/G-CLOUD/gke-nfs-cluster$
+

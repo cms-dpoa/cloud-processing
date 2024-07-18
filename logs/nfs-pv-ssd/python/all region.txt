@@ -1,0 +1,41 @@
+# Prepare the data for Finland
+data_finland = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072, 10240],
+    'Download Time (s)': [18, 26, 47, 69, 89, 190, 278, 910],
+    'Region': ['Finland'] * 8  # Repeat 'Finland' 8 times
+}
+
+# Prepare the data for Milan
+data_milan = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072, 10240],
+    'Download Time (s)': [31, 44, 77, 87, 134, 244, 404, 1343],
+    'Region': ['Milan'] * 8  # Repeat 'Milan' 8 times
+}
+
+# Prepare the data for Las Vegas
+data_las_vegas = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072],
+    'Download Time (s)': [37, 103, 208, 168, 199, 435, 1604],
+    'Region': ['Las Vegas'] * 7  # Repeat 'Las Vegas' 7 times
+}
+
+# Create DataFrames
+df_finland = pd.DataFrame(data_finland)
+df_milan = pd.DataFrame(data_milan)
+df_las_vegas = pd.DataFrame(data_las_vegas)
+
+# Concatenate the DataFrames
+df = pd.concat([df_finland, df_milan, df_las_vegas])
+
+# Create the plot
+sns.set(style="whitegrid")
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=df, y='File Size (MB)', x='Download Time (s)', hue='Region', marker='o')
+
+# Add title and labels
+plt.title('File Size vs Download Time by Region')
+plt.ylabel('File Size (MB)')
+plt.xlabel('Download Time (s)')
+
+# Show the plot
+plt.show()
