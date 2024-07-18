@@ -16,7 +16,7 @@ spec:
       # Enter recid (record id) of the dataset to be processed
       value: <RECID>
     - name: nJobs
-      value: 3
+      value: 6
     - name: bucket
       #FIXME (enter name of cloud storage bucket for storing outputs)
       value: <BUCKET_NAME>
