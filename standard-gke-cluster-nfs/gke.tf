@@ -20,7 +20,7 @@ resource "google_container_node_pool" "cluster1_nodes" {
     # service_account = google_service_account.default.email
     machine_type = var.gke_machine_type
     disk_size_gb = var.gke_node_disk_size
-    disk_type    = "pd-standard"
+    disk_type    = var.gke_node_disk_type
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
@@ -32,7 +32,7 @@ resource "google_container_node_pool" "cluster1_nodes" {
 
 resource "google_compute_disk" "default" {
   name = "gce-nfs-disk-${var.name}"
-  type = "pd-standard"
+  type = var.persistent_disk_type
   size = var.persistent_disk_size
   zone  = var.region
 }

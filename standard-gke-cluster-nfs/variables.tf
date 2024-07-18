@@ -21,9 +21,19 @@ variable "gke_node_disk_size" {
   description = "GKE node disk size"
 }
 
+variable "gke_node_disk_type" {
+  default     = "pd-standard"
+  description = "GKE node disk type"
+}
+
 variable "persistent_disk_size" {
   default     = 100
   description = "Persistent disk size"
+}
+
+variable "persistent_disk_type" {
+  default = "pd-standard"
+  description = "Persistent disk type"
 }
 
 variable "persistent_claim_storage_request" {

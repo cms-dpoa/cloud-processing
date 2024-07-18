@@ -18,7 +18,9 @@ spec:
     - name: nEvents                               
       value: 1000
     - name: recid
-      value: 0
+      #FIXME
+      # Enter recid (record id) of the dataset to be processed
+      value: <RECID>
     - name: nJobs
       value: 6
     
@@ -121,12 +123,13 @@ spec:
       image: cernopendata/cernopendata-client
       command: [bash]
       source: |
-        #cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd > /mnt/vol/files_{{inputs.parameters.recid}}.txt;
-        #cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary > /tmp/type.txt 
-        #cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files
-        curl -s -o /mnt/vol/files_{{inputs.parameters.recid}}.txt https://raw.githubusercontent.com/cms-opendata-analyses/PFNanoProducerTool/master/cloud/filelist-temp.txt
-        echo Collision > /tmp/type.txt
-        echo 1236
+        cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd > /mnt/vol/files_{{inputs.parameters.recid}}.txt;
+        cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary > /tmp/type.txt 
+        cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files
+
+        #curl -s -o /mnt/vol/files_{{inputs.parameters.recid}}.txt https://raw.githubusercontent.com/cms-opendata-analyses/PFNanoProducerTool/master/cloud/filelist-temp.txt
+        #echo Collision > /tmp/type.txt
+        #echo 1236
       volumeMounts:
       - name: task-pv-storage
         mountPath: /mnt/vol
