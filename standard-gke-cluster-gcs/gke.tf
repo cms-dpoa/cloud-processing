@@ -28,7 +28,7 @@ resource "google_container_node_pool" "cluster1_nodes" {
     # service_account = google_service_account.default.email
     machine_type = var.gke_machine_type
     disk_size_gb = var.gke_node_disk_size
-    disk_type    = "pd-standard"
+    disk_type    = var.gke_node_disk_type
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]

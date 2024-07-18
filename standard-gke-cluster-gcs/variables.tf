@@ -21,6 +21,11 @@ variable "gke_node_disk_size" {
   description = "GKE node disk size"
 }
 
+variable "gke_node_disk_type" {
+  default     = "pd-standard"
+  description = "GKE node disk type"
+}
+
 variable "name" {
   default     = "1"
   description = "Cluster name"
