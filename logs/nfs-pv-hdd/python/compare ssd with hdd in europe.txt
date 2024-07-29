@@ -1,0 +1,48 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Finland SSD data
+finland_ssd_data = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072],
+    'Download Time (s)': [18, 26, 47, 69, 89, 190, 278],
+    'Type': ['Finland SSD'] * 7
+}
+
+# Milan SSD data
+milan_ssd_data = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072],
+    'Download Time (s)': [31, 44, 77, 87, 134, 244, 404],
+    'Type': ['Milan SSD'] * 7
+}
+
+# Finland HDD data
+finland_hdd_data = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072],
+    'Download Time (s)': [19, 30, 48, 68, 100, 194, 291],
+    'Type': ['Finland HDD'] * 7
+}
+
+# Milan HDD data
+milan_hdd_data = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072],
+    'Download Time (s)': [27, 36, 64, 80, 113, 236, 321],
+    'Type': ['Milan HDD'] * 7
+}
+
+# Combine data into a single DataFrame using concat and reset the index to avoid duplicates
+finland_ssd_df = pd.DataFrame(finland_ssd_data)
+milan_ssd_df = pd.DataFrame(milan_ssd_data)
+finland_hdd_df = pd.DataFrame(finland_hdd_data)
+milan_hdd_df = pd.DataFrame(milan_hdd_data)
+
+data = pd.concat([finland_ssd_df, milan_ssd_df, finland_hdd_df, milan_hdd_df]).reset_index(drop=True)
+
+# Create seaborn plot with adjusted axis limits and a clearer display
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=data, x='Download Time (s)', y='File Size (MB)', hue='Type', marker='o')
+plt.title('Download Time vs File Size')
+plt.xlabel('Download Time (s)')
+plt.ylabel('File Size (MB)')
+plt.grid(True)
+plt.show()

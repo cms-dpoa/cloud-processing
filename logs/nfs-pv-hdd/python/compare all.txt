@@ -1,0 +1,41 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Finland NFS PV HDD data
+finland_data = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072],
+    'Download Time (s)': [19, 30, 48, 68, 100, 194, 291],
+    'Location': ['Finland'] * 7
+}
+
+# Milan NFS PV HDD data
+milan_data = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072],
+    'Download Time (s)': [27, 36, 64, 80, 113, 236, 321],
+    'Location': ['Milan'] * 7
+}
+
+# LAS VEGAS NFS PV HDD data
+las_vegas_data = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072],
+    'Download Time (s)': [38, 63, 93, 147, 176, 309, 486],
+    'Location': ['Las Vegas'] * 7
+}
+
+# Combine data into a single DataFrame using concat and reset the index to avoid duplicates
+finland_df = pd.DataFrame(finland_data)
+milan_df = pd.DataFrame(milan_data)
+las_vegas_df = pd.DataFrame(las_vegas_data)
+data = pd.concat([finland_df, milan_df, las_vegas_df]).reset_index(drop=True)
+
+# Create seaborn plot with adjusted axis limits and a clearer display
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=data, y='File Size (MB)', x='Download Time (s)', hue='Location', marker='o')
+plt.title('Download Time vs File Size')
+plt.ylabel('File Size (MB)')
+plt.xlabel('Download Time (s)')
+plt.ylim(0, 3200)
+plt.xlim(0, 500)
+plt.grid(True)
+plt.show()

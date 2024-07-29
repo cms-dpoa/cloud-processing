@@ -1,0 +1,14 @@
+tar: Removing leading `/' from member 
+78.0  B 0:00:27 [2.88  B/s] [    <=>                                                                                                           ]
+tar: Removing leading `/' from member names
+78.0  B 0:00:36 [2.11  B/s] [    <=>                                                                                                           ]
+tar: Removing leading `/' from member names
+78.0  B 0:01:04 [1.20  B/s] [    <=>                                                                                                           ]
+tar: Removing leading `/' from member names
+44.0  B 0:01:20 [ 560miB/s] [    <=>                                                                                                           ]
+tar: Removing leading `/' from member names                                                                                                    ]
+44.0  B 0:01:53 [ 395miB/s] [    <=>                                                                                                           ]
+tar: Removing leading `/' from member names                                                                                                    ]
+44.0  B 0:03:56 [ 190miB/s] [    <=>                                                                                                           ]
+tar: Removing leading `/' from member names
+78.0  B 0:05:21 [ 248miB/s] 
