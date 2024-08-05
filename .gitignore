@@ -1,5 +1,6 @@
 outputs/*
-testing/*
+nfs-testing/*
+bucket-testing/*
 
 # Local .terraform directories
 **/**/.terraform/*
@@ -42,4 +43,4 @@ testing/*
 
 # Ignore service account files
 **/cms_service_acc.json
-**/cms-getting-started-8762cf99ee85.json:Zone.Identifier
+**/cms_service_acc.json:Zone.Identifier
