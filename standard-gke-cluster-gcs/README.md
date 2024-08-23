@@ -49,6 +49,17 @@ With gcloud CLI, buckets can be created as following:
 gcloud storage buckets create gs://<BUCKET_NAME> --location=<BUCKET_LOCATION>
 ```
 
+To use the bucket, a service account and IAM policy binding have to be set up:
+
+1. Setting up service account:
+```
+gcloud iam service-accounts create bucket-access --project <project-name>
+```
+2. Creating IAM policy binding:
+```
+gcloud projects add-iam-policy-binding <project-name> --member "serviceAccount:bucket-access@<project-name>.iam.gserviceaccount.com" --role "roles/storage.objectAdmin"
+```
+
 More information can be found here: https://cloud.google.com/storage/docs/creating-buckets#storage-create-bucket-cli
 
 
