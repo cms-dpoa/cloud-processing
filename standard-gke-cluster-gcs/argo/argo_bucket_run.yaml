@@ -4,11 +4,7 @@ metadata:
   generateName: pfnano-process-
 spec:
   entrypoint: cms-od-example
-  # volumes:
-  # - name: task-pv-storage
-  #   persistentVolumeClaim:
-  #     claimName: nfs-3
-
+  
   arguments:
     parameters:
     - name: startFile                                  
