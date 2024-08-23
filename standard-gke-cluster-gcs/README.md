@@ -133,7 +133,7 @@ Install the argo workflows CLI following the instructions in https://github.com/
 
 The `argo` subdirectory has these example workflows:
 
-- argo_bucket_start.yaml: runs 6 parallel jobs with resource requests so that there will be only one job on each node. Can be used to make sure that the container image is pulled to each node and to monitor the resource needs before launching the production.
+- argo_bucket_start.yaml: runs 3 parallel jobs with resource requests so that there will be only one job on each node. Can be used to make sure that the container image is pulled to each node and to monitor the resource needs before launching the production.
 - argo_bucket_run.yaml: an example workflow with 24 parallel jobs.
 
 Change the bucket name in the workflow file to correspond to the bucket in use.
