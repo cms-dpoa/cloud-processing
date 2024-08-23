@@ -1,4 +1,4 @@
-## Terraform scripts for a GKE Standard Cluster with an NFS disk
+## Terraform scripts for a GKE Standard Cluster with a Google Cloud Storage (GCS) bucket
 
 ### Prerequisites
 
@@ -28,6 +28,8 @@ Install terraform: follow Ubuntu/Debian in https://developer.hashicorp.com/terra
 Install kubectl:
 - either [on its own](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management) or with [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
+Note that a Google Cloud billing account needs to be created and assigned to the GCP project that will be used with this repository.
+
 ### Get the code
 
 Clone the code using ssh ([generate the ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux) and [add it to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui)):
@@ -40,10 +42,22 @@ cd cloud-processing/standard-gke-cluster-gcs
 ### Create the bucket
 
 The bucket has to be created separately since it is not included in the terraform deployments.
-If using gcloud CLI, buckets can be created as following:
+Please make sure to use the same location for the bucket as the project.
+With gcloud CLI, buckets can be created as following:
 
 ```
 gcloud storage buckets create gs://<BUCKET_NAME> --location=<BUCKET_LOCATION>
+```
+
+To use the bucket, a service account and IAM policy binding have to be set up:
+
+1. Setting up service account:
+```
+gcloud iam service-accounts create bucket-access --project <project-name>
+```
+2. Creating IAM policy binding:
+```
+gcloud projects add-iam-policy-binding <project-name> --member "serviceAccount:bucket-access@<project-name>.iam.gserviceaccount.com" --role "roles/storage.objectAdmin"
 ```
 
 More information can be found here: https://cloud.google.com/storage/docs/creating-buckets#storage-create-bucket-cli
@@ -52,7 +66,9 @@ More information can be found here: https://cloud.google.com/storage/docs/creati
 ### Create the cluster
 
 Set `project_id`, `region` and `name` in `terraform.tfvars` to the desired values.
-It might be necessary to specify a zone, rather than a region for the `region`-variable.
+The `project_id` is the id of your GCP project and can be found via gcloud CLI command `gcloud projects list` or in the Google Cloud console when selecting a project.
+As of now, Google cloud requires a zone rather than a region, so choose a zone for the `region`-variable.
+A zone is usually just the region name followed by -a,-b or -c, i.e. `us-west1-a` instead of `us-west1`.
 See regions and zones here: https://cloud.google.com/compute/docs/regions-zones
 
 The `name`-variable will be used to set the name of the gke cluster and other resources as in the following example: 
@@ -117,7 +133,7 @@ Install the argo workflows CLI following the instructions in https://github.com/
 
 The `argo` subdirectory has these example workflows:
 
-- argo_bucket_start.yaml: runs 6 parallel jobs with resource requests so that there will be only one job on each node. Can be used to make sure that the container image is pulled to each node and to monitor the resource needs before launching the production.
+- argo_bucket_start.yaml: runs 3 parallel jobs with resource requests so that there will be only one job on each node. Can be used to make sure that the container image is pulled to each node and to monitor the resource needs before launching the production.
 - argo_bucket_run.yaml: an example workflow with 24 parallel jobs.
 
 Change the bucket name in the workflow file to correspond to the bucket in use.
@@ -132,15 +148,26 @@ Submit the job with this command after changing the filename to the desired work
 argo submit argo_bucket_start.yaml -n argo 
 ```
 
-### Destroy the resource
+### Download the output files
+Once the workflow is completed, the output files are transferred to the storage bucket.
+The files can be downloaded to a local machine either from within the google cloud console or with the following command:
+```
+gsutil -m cp -r gs://<BUCKET_NAME>/ .
+```
+The target directory can be set by replacing the dot with the desired local path.
+The bucket can be emptied with:
+```
+gsutil -m rm gs://<BUCKET_NAME>/**
+```
+Alternatively, the bucket can be completely deleted with:
+```
+gcloud storage rm --recursive gs://<BUCKET_NAME>
+```
+
+### Destroy the resources
 
 Destroy resources with
 
 ```
 terraform destroy
 ```
-
-
-
-
-
