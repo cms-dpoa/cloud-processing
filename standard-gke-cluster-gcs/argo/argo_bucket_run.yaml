@@ -4,6 +4,7 @@ metadata:
   generateName: pfnano-process-
 spec:
   entrypoint: cms-od-example
+  serviceAccountName: argo-service-account
   
   arguments:
     parameters:

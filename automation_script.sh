@@ -32,6 +32,7 @@ NUM_JOBS="24"
 # If using the gcs (google cloud storage) bucket workflow, enter the name of your bucket
 NFS_DISK_TYPE=""
 BUCKET_NAME=""
+SERVICE_ACC_FILE=""
 
 # From this point, the actual script starts, first filling in variables from above into terraform.tfvars
 # and the argo workflow, to customise the number of jobs and how many events should be processed
@@ -39,7 +40,8 @@ BUCKET_NAME=""
 # Insert the variable values into the placeholders in terraform.tfvars
 sed -i.bak -e "s/<PROJECT_ID>/$PROJECT_ID/" -e "s/<REGION>/$REGION/" -e "s/<NAME>/$TIMESTAMP/" \
     -e "s/<NUM_NODES>/$NUM_NODES/" -e "s/<MACHINE_TYPE>/$MACHINE_TYPE/" \
-    -e "s/<NODE_DISK_TYPE>/$NODE_DISK_TYPE/" -e "s/<NFS_DISK_TYPE>/$NFS_DISK_TYPE/" "${TERRAFORM_DIR}/terraform.tfvars"
+    -e "s/<NODE_DISK_TYPE>/$NODE_DISK_TYPE/" -e "s/<NFS_DISK_TYPE>/$NFS_DISK_TYPE/" \
+    -e "s/<SERVICE_ACCOUNT_FILE>/$SERVICE_ACC_FILE/" "${TERRAFORM_DIR}/terraform.tfvars"
 
 # Insert the variable values into the argo workflow
 sed -i.bak -e "s/<NAME>/$TIMESTAMP/" -e "s/<RECID>/$RECID/" \
