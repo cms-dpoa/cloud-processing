@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: argo
+  name: argo-service-account
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log", "configmaps"]
+  verbs: ["get", "list", "watch", "create", "delete", "patch"]
+- apiGroups: ["argoproj.io"]
+  resources: ["workflows"]
+  verbs: ["get", "list", "watch", "create", "delete", "patch"]
+- apiGroups: ["coordination.k8s.io"]
+  resources: ["leases"]
+  verbs: ["get", "list", "watch", "create", "update", "patch"]
