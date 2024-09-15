@@ -15,7 +15,7 @@ NAMESPACE="argo"
 # Cluster variables
 # Cluster name should be unique for better cost monitoring
 # In this case it is kept unique via including the timestamp
-PROJECT_ID="gcs-bucket-tom"
+PROJECT_ID=""
 REGION="europe-north1-b"
 TIMESTAMP=$(date +'%y%m%d-%H-%M')
 CLUSTER_NAME="cluster-$TIMESTAMP"
@@ -31,7 +31,7 @@ NUM_JOBS="12"
 # Set a value for nfs disk type if using the nfs cluster, e.g. "pd-standard" or "pd-ssd"
 # If using the gcs (google cloud storage) bucket workflow, enter the name of your bucket
 NFS_DISK_TYPE=""
-BUCKET_NAME="gcs_tom"
+BUCKET_NAME=""
 SERVICE_ACC_FILE=""
 
 # From this point, the actual script starts, first filling in variables from above into terraform.tfvars
