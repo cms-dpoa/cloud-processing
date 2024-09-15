@@ -9,13 +9,13 @@
 # The following contains paths for the terraform config files,
 # workflow file and namespace to use
 TERRAFORM_DIR="standard-gke-cluster-gcs"
-WORKFLOW_FILE="${TERRAFORM_DIR}/argo/argo_bucket_upload.yaml"
+WORKFLOW_FILE="argo/argo_bucket_run.yaml"
 NAMESPACE="argo"
 
 # Cluster variables
 # Cluster name should be unique for better cost monitoring
 # In this case it is kept unique via including the timestamp
-PROJECT_ID=""
+PROJECT_ID="gcs-bucket-tom"
 REGION="europe-north1-b"
 TIMESTAMP=$(date +'%y%m%d-%H-%M')
 CLUSTER_NAME="cluster-$TIMESTAMP"
@@ -24,24 +24,27 @@ MACHINE_TYPE="e2-standard-4"
 NODE_DISK_TYPE="pd-ssd"
 
 # Dataset variables
-RECID="30541"
-NUM_EVENTS="300000"
-NUM_JOBS="24"
+RECID="30544"
+NUM_EVENTS="30000"
+NUM_JOBS="12"
 
 # Set a value for nfs disk type if using the nfs cluster, e.g. "pd-standard" or "pd-ssd"
 # If using the gcs (google cloud storage) bucket workflow, enter the name of your bucket
 NFS_DISK_TYPE=""
-BUCKET_NAME=""
+BUCKET_NAME="gcs_tom"
 SERVICE_ACC_FILE=""
 
 # From this point, the actual script starts, first filling in variables from above into terraform.tfvars
 # and the argo workflow, to customise the number of jobs and how many events should be processed
 
+# Change the directory to the one containing the terraform configuration files
+cd "${TERRAFORM_DIR}"
+
 # Insert the variable values into the placeholders in terraform.tfvars
 sed -i.bak -e "s/<PROJECT_ID>/$PROJECT_ID/" -e "s/<REGION>/$REGION/" -e "s/<NAME>/$TIMESTAMP/" \
     -e "s/<NUM_NODES>/$NUM_NODES/" -e "s/<MACHINE_TYPE>/$MACHINE_TYPE/" \
     -e "s/<NODE_DISK_TYPE>/$NODE_DISK_TYPE/" -e "s/<NFS_DISK_TYPE>/$NFS_DISK_TYPE/" \
-    -e "s/<SERVICE_ACCOUNT_FILE>/$SERVICE_ACC_FILE/" "${TERRAFORM_DIR}/terraform.tfvars"
+    -e "s/<SERVICE_ACCOUNT_FILE>/$SERVICE_ACC_FILE/" "terraform.tfvars"
 
 # Insert the variable values into the argo workflow
 sed -i.bak -e "s/<NAME>/$TIMESTAMP/" -e "s/<RECID>/$RECID/" \
@@ -66,9 +69,9 @@ prepare_cluster() {
     # Install argo, user proper install file instead of previously used quickstart version
     # Requires service account, role and role binding for permissions
     kubectl apply -n $NAMESPACE -f https://github.com/argoproj/argo-workflows/releases/download/v3.5.10/install.yaml
-    kubectl apply -f "${TERRAFORM_DIR}/argo/service_account.yaml"
-    kubectl apply -f "${TERRAFORM_DIR}/argo/argo_role.yaml"
-    kubectl apply -f "${TERRAFORM_DIR}/argo/argo_role_binding.yaml"
+    kubectl apply -f "argo/service_account.yaml"
+    kubectl apply -f "argo/argo_role.yaml"
+    kubectl apply -f "argo/argo_role_binding.yaml"
     echo "Cluster preparation complete."
 }
 
@@ -117,7 +120,7 @@ monitor_workflow() {
 
 # Recording potentially useful workflow details
 log_workflow_details() {
-    OUTPUT_DIR="${TERRAFORM_DIR}/outputs"
+    OUTPUT_DIR="outputs"
     mkdir -p "${OUTPUT_DIR}"
 
     # Get the generated string for the pfnano process to use as filename
@@ -149,7 +152,7 @@ log_workflow_details() {
     # Store workflow and cluster information
     echo -e "Cluster configuration:\n" > $CONFIG_FILE
     echo -e "Workflow: $WORKFLOW_FILE" >> $CONFIG_FILE
-    cat "${TERRAFORM_DIR}/terraform.tfvars" >> $CONFIG_FILE
+    cat "terraform.tfvars" >> $CONFIG_FILE
 
     # Get workflow info
     echo -e "\n" >> $CONFIG_FILE
@@ -168,8 +171,9 @@ destroy_resources() {
 # to restore the placeholders
 reset_files() {
     # Restore original terraform file and argo workflow file from backups
-    cp "${TERRAFORM_DIR}/terraform.tfvars.bak" "${TERRAFORM_DIR}/terraform.tfvars"
+    cp "terraform.tfvars.bak" "terraform.tfvars"
     cp "${WORKFLOW_FILE}.bak" "${WORKFLOW_FILE}"
+    cd ".."
 }
 
 # Main script execution
