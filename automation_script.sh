@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Move this file to the folder containing terraform.tfvars!
-# Also ensure the argo workflow is in the correct path as below
+# Move this file to the root directory and give the correct paths for
+# the terraform directory (containing terraform.tfvars) and argo workflows to run
 
 # The following variables can be customised
 # some of them, like the project id, are required
@@ -48,8 +48,8 @@ sed -i.bak -e "s/<PROJECT_ID>/$PROJECT_ID/" -e "s/<REGION>/$REGION/" -e "s/<NAME
 
 # Insert the variable values into the argo workflow
 sed -i.bak -e "s/<NAME>/$TIMESTAMP/" -e "s/<RECID>/$RECID/" \
-    -e "s/<N_EVENTS>/$NUM_EVENTS/" -e "s/<N_JOBS>/$NUM_JOBS/" \
-    -e "s/<BUCKET_NAME>/$BUCKET_NAME/" "${WORKFLOW_FILE}"
+    -e "s/<N_EVENTS>/$NUM_EVENTS/"  -e "s/<N_JOBS>/$NUM_JOBS/" \
+    -e "s/<N_NODES>/$NUM_NODES/" -e "s/<BUCKET_NAME>/$BUCKET_NAME/" "${WORKFLOW_FILE}"
 
 # Function to deploy the cluster and other cloud resources using Terraform
 deploy_resources() {
@@ -83,7 +83,7 @@ run_argo_workflow() {
 
 # Function to monitor Argo workflow
 monitor_workflow() {
-    WORKFLOW_NAME=$(argo list -n $NAMESPACE | tail -n 1 | awk '{print $1}')
+    WORKFLOW_NAME=$(argo get @latest -n $NAMESPACE | grep -m 1 "Name:" | awk '{print $2}')
     echo "Monitoring Argo workflow..."
 
     # Counter to check the status after a certain time interval (default: 10 seconds)
@@ -135,7 +135,7 @@ log_workflow_details() {
     ARGO_LOGS=$(argo logs -n $NAMESPACE $WORKFLOW_NAME)
 
     # Extract job duration and timestamps for archiving to bucket from pod logs
-    JOB_TIMES=$(echo "$ARGO_LOGS" | grep -A 1 "of processing time.")
+    JOB_TIMES=$(echo "$ARGO_LOGS" | grep -A 1 "Job duration:")
     ARCHIVING_TIMES=$(echo "$ARGO_LOGS" | grep -A 1 "level=info msg=\"Taring")
 
     # Save the job duration and archiving information separately

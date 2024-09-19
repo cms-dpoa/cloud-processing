@@ -23,7 +23,9 @@ spec:
       # Record id of the dataset to be processed
       value: <RECID>
     - name: nJobs
-      value: 6
+      #FIXME
+      # Set the number of jobs to number of cluster nodes (resulting in one job per node)
+      value: <N_NODES>
     
 
   templates:

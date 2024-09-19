@@ -17,7 +17,7 @@ spec:
       # Record id of the dataset to be processed
       value: <RECID>
     - name: nJobs
-      value: 3
+      value: <N_NODES>
     - name: bucket
       #FIXME 
       # Name of cloud storage bucket for storing outputs
