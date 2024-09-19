@@ -48,7 +48,7 @@ sed -i.bak -e "s/<PROJECT_ID>/$PROJECT_ID/" -e "s/<REGION>/$REGION/" -e "s/<NAME
 
 # Insert the variable values into the argo workflow
 sed -i.bak -e "s/<NAME>/$TIMESTAMP/" -e "s/<RECID>/$RECID/" \
-    -e "s/<N_EVENTS>/$NUM_EVENTS/"  -e "s/<N_JOBS>/$NUM_JOBS/" \
+    -e "s/<N_EVENTS>/$NUM_EVENTS/" -e "s/<N_JOBS>/$NUM_JOBS/" \
     -e "s/<N_NODES>/$NUM_NODES/" -e "s/<BUCKET_NAME>/$BUCKET_NAME/" "${WORKFLOW_FILE}"
 
 # Function to deploy the cluster and other cloud resources using Terraform
