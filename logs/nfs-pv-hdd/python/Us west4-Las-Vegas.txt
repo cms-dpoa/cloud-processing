@@ -1,0 +1,25 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Prepare the data
+data = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072],  # Size in MB for the respective files
+    'Download Time (s)': [38, 63, 93, 147, 176, 309, 486]  # Download time in seconds
+}
+
+# Create a DataFrame
+df = pd.DataFrame(data)
+
+# Create the plot
+sns.set(style="whitegrid")
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=df, y='File Size (MB)', x='Download Time (s)', marker='o')
+
+# Add title and labels
+plt.title('Download Time vs File Size LAS VEGAS NFS PV HDD')
+plt.ylabel('File Size (MB)')
+plt.xlabel('Download Time (s)')
+
+# Show the plot
+plt.show()

@@ -1,0 +1,73 @@
+subash@MSI:/mnt/c/SUBASH/G-CLOUD/BUCKET$ ./download_script.sh
+STARTING COPYING USING GSUTIL
+Copying gs://bucket-europe-west9-paris/200.txt...
+/ [1/1 files][200.0 MiB/200.0 MiB] 100% Done   7.4 MiB/s ETA 00:00:00
+Operation completed over 1 objects/200.0 MiB.
+
+real    0m22.302s
+user    0m3.247s
+sys     0m1.602s
+Copying gs://bucket-europe-west9-paris/300.txt...
+\ [1/1 files][300.0 MiB/300.0 MiB] 100% Done  10.2 MiB/s ETA 00:00:00
+Operation completed over 1 objects/300.0 MiB.
+
+real    0m36.587s
+user    0m4.473s
+sys     0m1.915s
+Copying gs://bucket-europe-west9-paris/512.txt...
+- [1/1 files][512.0 MiB/512.0 MiB] 100% Done   8.9 MiB/s ETA 00:00:00
+Operation completed over 1 objects/512.0 MiB.
+
+real    1m15.568s
+user    0m7.294s
+sys     0m3.593s
+Copying gs://bucket-europe-west9-paris/700.txt...
+/ [1/1 files][700.0 MiB/700.0 MiB] 100% Done  10.7 MiB/s ETA 00:00:00
+Operation completed over 1 objects/700.0 MiB.
+
+real    1m6.875s
+user    0m8.331s
+sys     0m4.514s
+Copying gs://bucket-europe-west9-paris/1GB.zip...
+/ [1/1 files][  1.0 GiB/  1.0 GiB] 100% Done   7.9 MiB/s ETA 00:00:00
+Operation completed over 1 objects/1.0 GiB.
+
+real    1m36.536s
+user    0m11.866s
+sys     0m5.940s
+Copying gs://bucket-europe-west9-paris/1_5GB/1GB.zip...
+Copying gs://bucket-europe-west9-paris/1_5GB/512MB.zip.crdownload...
+\ [2/2 files][  1.5 GiB/  1.5 GiB] 100% Done   8.7 MiB/s ETA 00:00:00
+Operation completed over 2 objects/1.5 GiB.
+
+real    2m25.500s
+user    0m20.299s
+sys     0m9.994s
+Copying gs://bucket-europe-west9-paris/2GB/1GB.zip...
+Copying gs://bucket-europe-west9-paris/2GB/1GB/1GB.zip...
+- [2/2 files][  2.0 GiB/  2.0 GiB] 100% Done  10.0 MiB/s ETA 00:00:00
+Operation completed over 2 objects/2.0 GiB.
+
+real    3m15.222s
+user    0m28.931s
+sys     0m14.161s
+Copying gs://bucket-europe-west9-paris/2_5GB/2GB/1GB.zip...
+Copying gs://bucket-europe-west9-paris/2_5GB/2GB/1GB/1GB.zip...
+Copying gs://bucket-europe-west9-paris/2_5GB/512MB.zip.crdownload...
+- [3/3 files][  2.5 GiB/  2.5 GiB] 100% Done   8.4 MiB/s ETA 00:00:00
+Operation completed over 3 objects/2.5 GiB.
+
+real    4m14.677s
+user    0m38.821s
+sys     0m19.219s
+Copying gs://bucket-europe-west9-paris/5GB/1GB/1GB.zip...
+Copying gs://bucket-europe-west9-paris/5GB/2GB/1GB.zip...
+Copying gs://bucket-europe-west9-paris/5GB/2GB/1GB/1GB.zip...
+Copying gs://bucket-europe-west9-paris/5GB/2GB/2GB/1GB.zip...
+Copying gs://bucket-europe-west9-paris/5GB/2GB/2GB/1GB/1GB.zip...
+- [5/5 files][  5.0 GiB/  5.0 GiB] 100% Done  10.6 MiB/s ETA 00:00:00
+Operation completed over 5 objects/5.0 GiB.
+
+real    7m52.375s
+user    1m11.503s
+sys     0m31.322s

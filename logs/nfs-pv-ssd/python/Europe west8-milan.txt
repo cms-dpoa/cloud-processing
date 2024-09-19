@@ -1,0 +1,21 @@
+# Prepare the data
+data = {
+    'File Size (MB)': [200, 300, 512, 700, 1024, 2048, 3072, 10240],  # Size in MB for the respective files
+    'Download Time (s)': [31, 44, 77, 87, 134, 244, 404, 1343]  # Download time in seconds
+}
+
+# Create a DataFrame
+df = pd.DataFrame(data)
+
+# Create the plot
+sns.set(style="whitegrid")
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=df, y='File Size (MB)', x='Download Time (s)', marker='o')
+
+# Add title and labels
+plt.title('File Size vs Download Time(Europe west8-milan) ')
+plt.ylabel('File Size (MB)')
+plt.xlabel('Download Time (s)')
+
+# Show the plot
+plt.show()

@@ -1,0 +1,7 @@
+subash@MSI:/mnt/c/SUBASH/G-CLOUD/gke-nfs-cluster$ kubectl cp nfs-server-7c569b7755-dnlwd:/etc/10GB.zip ./10GB.zip | pv
+44.0  B 0:06:33 [0.00  B/s] [  <=>                                                                                                             ]
+44.0  B 0:00:49 [0.00  B/s] [   <=>
+                                           ]
+
+
+44.0  B 0:15:10 [49.5miB/s] [    <=>      

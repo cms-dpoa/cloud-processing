@@ -1,0 +1,25 @@
+#!/bin/bash
+kubectl cp nfs-server-7c569b7755-dnlwd:/etc/200.txt ./200.txt | pv
+kubectl cp nfs-server-7c569b7755-dnlwd:/etc/300.txt ./300.txt | pv
+kubectl cp nfs-server-7c569b7755-dnlwd:/etc/512.txt ./512.txt | pv
+kubectl cp nfs-server-7c569b7755-dnlwd:/etc/700.txt ./700.txt | pv
+kubectl cp nfs-server-7c569b7755-dnlwd:/etc/1GB.zip ./1GB.zip | pv
+kubectl cp nfs-server-7c569b7755-dnlwd:/etc/2GB.zip ./2GB.zip | pv
+kubectl cp nfs-server-7c569b7755-dnlwd:/etc/3GB.zip ./3GB.zip | pv
+
+
+subash@MSI:/mnt/c/SUBASH/G-CLOUD/gke-nfs-cluster$ ./nfs_download_script.sh
+tar: Removing leading `/' from member names
+44.0  B 0:00:18 [2.41  B/s] [      <=>                                                                                                                                                     ]
+tar: Removing leading `/' from member names
+78.0  B 0:00:26 [2.98  B/s] [      <=>                                                                                                                                                     ]
+tar: Removing leading `/' from member names
+44.0  B 0:00:47 [ 951miB/s] [      <=>                                                                                                                                                     ]
+tar: Removing leading `/' from member names                                                                                                                                                ]
+44.0  B 0:01:09 [ 644miB/s] [      <=>                                                                                                                                                     ]
+tar: Removing leading `/' from member names
+44.0  B 0:01:29 [ 502miB/s] [      <=>                                                                                                                                                     ]
+tar: Removing leading `/' from member names
+44.0  B 0:03:10 [ 236miB/s] [      <=>                                                                                                                                                     ]
+tar: Removing leading `/' from member names
+44.0  B 0:04:38 [ 161miB/s] [      <=>          

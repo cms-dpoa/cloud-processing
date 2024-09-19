@@ -1,0 +1,170 @@
+date,usage_start_time,usage_end_time,project_id,service,sku,cost,usage_amount,usage_unit,currency
+2024-07-11 00:00:00.000000 UTC,2024-07-10 10:00:00.000000 UTC,2024-07-10 11:00:00.000000 UTC,gcs-bucket-subash,Cloud Storage,Download Worldwide Destinations (excluding Asia & Australia),4.382677,43720980192.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,gcs-bucket-subash,Cloud Storage,Standard Storage Paris,0.020744,2.891855167488e+15,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002652,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002652,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002652,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002652,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002652,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002652,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,2024-07-11 15:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002651,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002651,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002651,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002651,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002651,193273528320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002613,190428112486400.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002613,190481799577600.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002608,190105989939200.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002589,188710125568000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002583,188334315929600.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002496,181999239168000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002177,158645354496000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 17:00:00.000000 UTC,2024-07-10 18:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.002169,158108483584000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.00173,126164664320000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,2024-07-11 18:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.001726,125788854681600.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.001684,122782377574400.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.001594,116178865356800.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 18:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.001589,115856742809600.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 15:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.001398,101898099097600.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 15:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.001253,91375429222400.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 18:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.001062,77416785510400.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.001057,77094662963200.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.000967,70491150745600.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.00092,67108864000000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,0.000475,34628173824000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,6.7e-05,4939212390400.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,6.2e-05,4563402752000.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,4.3e-05,3167538380800.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,3.9e-05,2845415833600.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,gcs-bucket-subash,Compute Engine,Storage PD Capacity in Finland,3.8e-05,2791728742400.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 10:00:00.000000 UTC,2024-07-10 11:00:00.000000 UTC,gcs-bucket-subash,Cloud Storage,Download Worldwide Destinations (excluding Asia & Australia),3.1e-05,312408.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 10:00:00.000000 UTC,2024-07-10 11:00:00.000000 UTC,gcs-bucket-subash,Cloud Storage,Standard Storage Finland,2e-06,368799907840.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 18:00:00.000000 UTC,2024-07-11 19:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1519.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 18:00:00.000000 UTC,2024-07-11 19:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,2024-07-11 18:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2361.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,2024-07-11 18:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,2024-07-11 18:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4965.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,2024-07-11 18:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2361.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1270.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4969.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1181.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2330.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,2024-07-11 17:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2419.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 15:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 15:00:00.000000 UTC,2024-07-11 16:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,2024-07-11 15:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2081.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,2024-07-11 15:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2170.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,2024-07-11 15:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1519.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,2024-07-11 15:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2360.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2170.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1519.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2081.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4969.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,2024-07-11 14:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1629487104.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,2024-07-11 13:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2361.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1538260992.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2170.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4967.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2081.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,2024-07-11 12:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1519.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2363.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4971.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,2024-07-11 11:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1519386624.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2081.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4969.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2170.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1451229184.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1519.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2363.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,2024-07-11 10:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2360.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1450180608.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,2024-07-11 09:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4969.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1340080128.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,619.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2981.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2170.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,2024-07-11 08:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2360.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1275068416.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4963.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,2024-07-11 07:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2357.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4964.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1217396736.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,2024-07-11 06:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2360.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2170.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4939.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1519.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2081.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,2024-07-11 05:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1087373312.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1008730112.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,2024-07-11 04:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,1008730112.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4969.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,2024-07-11 03:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2364.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1519.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,907018240.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2170.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2081.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,2024-07-11 02:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4973.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,873463808.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,2024-07-11 01:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2365.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1181.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2419.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2170.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,631242752.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,2024-07-11 00:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4971.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2170.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,2081.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1519.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,631242752.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2363.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,2024-07-10 23:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,1430.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,2024-07-10 22:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,631242752.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4975.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2364.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,2024-07-10 21:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,545259520.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,533725184.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,370.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,281.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3319.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,2024-07-10 20:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3230.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 18:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 18:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,gcs-bucket-subash,Networking,Networking Service Directory Integrated Resource,0.0,3600.0,seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 18:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,4971.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 18:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,406847488.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 18:00:00.000000 UTC,2024-07-10 19:00:00.000000 UTC,gcs-bucket-subash,Cloud Logging,Log Storage cost,0.0,2364.0,bytes,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 17:00:00.000000 UTC,2024-07-10 18:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,390070272.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 16:00:00.000000 UTC,2024-07-10 17:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,390070272.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 15:00:00.000000 UTC,2024-07-10 16:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,225443840.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 14:00:00.000000 UTC,2024-07-10 15:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,181403648.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 13:00:00.000000 UTC,2024-07-10 14:00:00.000000 UTC,gcs-bucket-subash,BigQuery,Active Logical Storage (europe-north1),0.0,120586240.0,byte-seconds,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 10:00:00.000000 UTC,2024-07-10 11:00:00.000000 UTC,gcs-bucket-subash,Cloud Storage,Regional Standard Class A Operations,0.0,2014.0,requests,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 10:00:00.000000 UTC,2024-07-10 11:00:00.000000 UTC,gcs-bucket-subash,Cloud Storage,Regional Standard Class B Operations,0.0,365.0,requests,CHF
+2024-07-11 00:00:00.000000 UTC,2024-07-10 10:00:00.000000 UTC,2024-07-10 11:00:00.000000 UTC,gcs-bucket-subash,Cloud Storage,Regional Standard Class A Operations,0.0,25.0,requests,CHF

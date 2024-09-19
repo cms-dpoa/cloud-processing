@@ -5,7 +5,6 @@ metadata:
 spec:
   entrypoint: cms-od-example
   serviceAccountName: argo-service-account
-  
   arguments:
     parameters:
     - name: startFile                                  
@@ -270,7 +269,7 @@ spec:
 
         copy=$(cat copiedto.txt)
         for c in $copy; do rm $c; done
-        
+
         mv nano_data2016.root /code/scatter/pfnanooutput$it.root
 
       resources:
