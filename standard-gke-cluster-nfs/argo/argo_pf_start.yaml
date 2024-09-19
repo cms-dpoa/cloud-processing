@@ -3,13 +3,14 @@ kind: Workflow
 metadata:
   generateName: pfnano-process-
 spec:
-  serviceAccountName: argo
   entrypoint: cms-od-example
+  serviceAccountName: argo-service-account
   volumes:
   - name: task-pv-storage
     persistentVolumeClaim:
       #FIXME
-      claimName: <NFS_DISK_NAME>
+      # Name of the nfs disk created by terraform
+      claimName: nfs-<NAME>
 
   arguments:
     parameters:
@@ -19,10 +20,12 @@ spec:
       value: 1000
     - name: recid
       #FIXME
-      # Enter recid (record id) of the dataset to be processed
+      # Record id of the dataset to be processed
       value: <RECID>
     - name: nJobs
-      value: 6
+      #FIXME
+      # Set the number of jobs to number of cluster nodes (resulting in one job per node)
+      value: <N_NODES>
     
 
   templates:

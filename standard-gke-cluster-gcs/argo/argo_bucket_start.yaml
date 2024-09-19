@@ -4,6 +4,7 @@ metadata:
   generateName: pfnano-process-
 spec:
   entrypoint: cms-od-example
+  serviceAccountName: argo-service-account
 
   arguments:
     parameters:
@@ -13,12 +14,13 @@ spec:
       value: 1000
     - name: recid
       #FIXME
-      # Enter recid (record id) of the dataset to be processed
+      # Record id of the dataset to be processed
       value: <RECID>
     - name: nJobs
-      value: 3
+      value: <N_NODES>
     - name: bucket
-      #FIXME (enter name of cloud storage bucket for storing outputs)
+      #FIXME 
+      # Name of cloud storage bucket for storing outputs
       value: <BUCKET_NAME>
     
 

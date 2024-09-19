@@ -4,23 +4,27 @@ metadata:
   generateName: pfnano-process-
 spec:
   entrypoint: cms-od-example
-
+  serviceAccountName: argo-service-account
   arguments:
     parameters:
     - name: startFile                                  
       value: 1
-    - name: nEvents                               
-      value: 10000
+    - name: nEvents   
+      #FIXME 
+      # Number of events in the dataset to be processed                       
+      value: <N_EVENTS>
     - name: recid
       #FIXME
-      # Enter recid (record id) of the dataset to be processed
+      # Record id of the dataset to be processed
       value: <RECID>
     - name: nJobs
-      value: 12
+      #FIXME 
+      # Number of jobs the processing workflow should be split into
+      value: <N_JOBS>
     - name: bucket
-      #FIXME (enter name of cloud storage bucket for storing outputs)
+      #FIXME 
+      # Name of cloud storage bucket for storing outputs
       value: <BUCKET_NAME>
-    
 
   templates:
   - name: cms-od-example
@@ -212,7 +216,7 @@ spec:
         dataType="{{inputs.parameters.dataType}}"
         echo Datatype $dataType
         isData=False
-        if  echo $dataType | grep Collision ; then isData=True; fi
+        if echo $dataType | grep Collision ; then isData=True; fi
 
         firstFile="{{inputs.parameters.firstFile}}"
         lastFile="{{inputs.parameters.lastFile}}"
@@ -252,8 +256,14 @@ spec:
         sed -i '/process.options.num/s/^/#/g' pfnano_data_2016UL_OpenData_cloud.py
         sed -i "/process.load('FWCore.MessageService.MessageLogger_cfi')/a process.MessageLogger.cerr.FwkReport.reportEvery = 500" pfnano_data_2016UL_OpenData_cloud.py
         sed -i "/from Configuration.AlCa.GlobalTag import GlobalTag/a process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/106X_dataRun2_v37.db')" pfnano_data_2016UL_OpenData_cloud.py
+        
+        cms_start_time=$(date +%s)
         cmsRun pfnano_data_2016UL_OpenData_cloud.py $firstFile $lastFile '"/code/filelist/files_local_{{inputs.parameters.recid}}.txt"' $eventsInJob
-
+        cms_end_time=$(date +%s)
+        job_duration=$((cms_end_time - cms_start_time))
+        echo "Job duration: Job $it took $(date -u -d @${job_duration} +'%H:%M:%S') to complete."
+        echo -e "Output file info: $(ls -lh nano_data2016.root)"
+        
         echo Check the available space after the job
         df -h
 

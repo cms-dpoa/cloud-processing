@@ -30,6 +30,18 @@ Install kubectl:
 
 Note that a Google Cloud billing account needs to be created and assigned to the GCP project that will be used with this repository.
 
+In addition, several APIs will need to be enabled in Google Cloud, which can be done through the console or with the gcloud command:
+
+```
+gcloud services enable <SERVICE_NAME>
+```
+
+The APIs that might need to be enabled are:
+- serviceusage.googleapis.com (Service Usage API)
+- cloudresourcemanager.googleapis.com (Cloud Resource Manager API)
+- container.googleapis.com (Kubernetes Engine API)
+- compute.googleapis.com (Compute Engine API)
+
 ### Get the code
 
 Clone the code using ssh ([generate the ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux) and [add it to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui)):
