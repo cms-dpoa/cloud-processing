@@ -27,7 +27,6 @@ spec:
       # Name of cloud storage bucket for storing outputs
       value: <BUCKET_NAME>
 
-
   templates:
   - name: cms-od-example
     inputs:
@@ -237,8 +236,8 @@ spec:
         cms_start_time=$(date +%s)
         cmsRun pfnano_data_2016UL_OpenData_cloud.py $firstFile $lastFile '"/code/filelist/files_{{inputs.parameters.recid}}.txt"' $eventsInJob
         cms_end_time=$(date +%s)
-        csmrun_process_time=$((cms_end_time - cms_start_time))
-        echo "Job $it took $(date -u -d @${csmrun_process_time} +'%H:%M:%S') of processing time."
+        job_duration=$((cms_end_time - cms_start_time))
+        echo "Job duration: Job $it took $(date -u -d @${job_duration} +'%H:%M:%S') to complete."
         echo -e "Output file info: $(ls -lh nano_data2016.root)"
         
         mv nano_data2016.root /code/scatter/pfnanooutput$it.root
