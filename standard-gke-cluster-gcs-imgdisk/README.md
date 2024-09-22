@@ -44,9 +44,10 @@ The APIs that might need to be enabled are:
 
 ([Generate a ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux) and [add it to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui)), if not alreday done.
 
-Prepare the secondary boot disk.
+Prepare the secondary boot disk:
 
-Create a bucket for the logs. This can be separate from the bucket for the output files, but it is created in the same way, see instructions below. Then use the code from [gke-disk-image-builder](https://github.com/GoogleCloudPlatform/ai-on-gke/tree/main/tools/gke-disk-image-builder) to build the disk. Note that the timeout time needs to be increased for the pfnano image (100m was enough).
+- Create a bucket for the logs. This can be separate from the bucket for the output files, but it is created in the same way, see instructions below. 
+- Then use the code from [gke-disk-image-builder](https://github.com/GoogleCloudPlatform/ai-on-gke/tree/main/tools/gke-disk-image-builder) to build the disk. Note that the timeout time needs to be increased for the pfnano image (100m was enough).
 
 ### Get the code
 
@@ -54,7 +55,7 @@ Clone the code using:
 
 ```
 git clone git@github.com:cms-dpoa/cloud-processing.git
-cd cloud-processing/standard-gke-cluster-gcs
+cd cloud-processing/standard-gke-cluster-gcs-imgdisk
 ```
 
 ### Create the bucket
