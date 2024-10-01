@@ -8,12 +8,10 @@ spec:
   
   arguments:
     parameters:
-    - name: startFile                                  
-      value: 1
     - name: nEvents   
       #FIXME 
-      # Number of events in the dataset to be processed                       
-      value: <N_EVENTS>
+      # Number of events in the dataset to be processed (-1 is all)                     
+      value: -1
     - name: recid
       #FIXME
       # Record id of the dataset to be processed
@@ -31,7 +29,6 @@ spec:
   - name: cms-od-example
     inputs:
       parameters:
-      - name: startFile
       - name: nEvents
       - name: recid
       - name: nJobs
@@ -55,8 +52,6 @@ spec:
         template: joblist-template
         arguments:
          parameters:
-          - name: startFile
-            value: "{{inputs.parameters.startFile}}"
           - name: nJobs
             value: "{{inputs.parameters.nJobs}}"
           - name: nEvents
@@ -85,13 +80,13 @@ spec:
             value: "{{item.eventsinjob}}"
         withParam: "{{tasks.joblist.outputs.result}}"
       
-      - name: plot
-        dependencies: [runpfnano]
-        template: plot-template
-        arguments:
-         parameters:
-          - name: bucket
-            value: "{{inputs.parameters.bucket}}"
+      # - name: plot
+      #   dependencies: [runpfnano]
+      #   template: plot-template
+      #   arguments:
+      #    parameters:
+      #     - name: bucket
+      #       value: "{{inputs.parameters.bucket}}"
 
   # Get the metadata of the dataset
   # Accidentally showing three different ways of passing parameters/files btw the steps
@@ -133,7 +128,6 @@ spec:
       parameters:
       - name: nJobs
       - name: nEvents
-      - name: startFile
       - name: totFiles
     script:
       image: python:alpine3.6
@@ -141,19 +135,24 @@ spec:
       source: |
         import json
         import sys
-        start = {{inputs.parameters.startFile}}
+        def split(a, n):
+          k, m = divmod(len(a), n)
+          return (a[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
         nJobs = {{inputs.parameters.nJobs}}
         nEvents = {{inputs.parameters.nEvents}}
         totFiles = {{inputs.parameters.totFiles}}
         filesInJob = int(totFiles/nJobs)
-        modFiles = totFiles % nJobs
-        eventsInJob = int(nEvents/nJobs)
-        modEvents = nEvents % nJobs
+        modEvents = 0
+        eventsInJob = -1
+        if nEvents > 0:
+          eventsInJob = int(nEvents/nJobs)
+          modEvents = nEvents % nJobs
+        splits= list(split(range(totFiles),nJobs))
         itlist = [i for i in range(1, nJobs+1)]
         dictlist = []
         for i in itlist:
-          first = start+(i-1)*filesInJob
-          last = first + filesInJob - 1
+          first = 1+splits[i-1][0]
+          last = 1+splits[i-1][len(splits[i-1])-1]
           adict = { "it": i, 
                     "firstfile": first, 
                     "lastfile":  last,
@@ -161,7 +160,7 @@ spec:
           if i == nJobs:            
             adict = { "it": i, 
                       "firstfile": first, 
-                      "lastfile":  last + modFiles,
+                      "lastfile":  last,
                       "eventsinjob": eventsInJob + modEvents}
           dictlist.append(adict)
         json.dump(dictlist, sys.stdout)
@@ -207,7 +206,8 @@ spec:
         # scram b
 
         it="{{inputs.parameters.it}}"
-        eventsInJob="{{inputs.parameters.eventsInJob}}"
+        eventsString="{{inputs.parameters.eventsInJob}}"
+        eventsInJob="int($eventsString)"
         dataType="{{inputs.parameters.dataType}}"
         echo Datatype $dataType
         isData=False
@@ -221,7 +221,7 @@ spec:
         sed -i '/process.options.num/s/^/#/g' pfnano_data_2016UL_OpenData_cloud.py
         sed -i "/process.load('FWCore.MessageService.MessageLogger_cfi')/a process.MessageLogger.cerr.FwkReport.reportEvery = 500" pfnano_data_2016UL_OpenData_cloud.py
         sed -i "/from Configuration.AlCa.GlobalTag import GlobalTag/a process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/106X_dataRun2_v37.db')" pfnano_data_2016UL_OpenData_cloud.py
-        
+
         cms_start_time=$(date +%s)
         cmsRun pfnano_data_2016UL_OpenData_cloud.py $firstFile $lastFile '"/code/filelist/files_{{inputs.parameters.recid}}.txt"' $eventsInJob
         cms_end_time=$(date +%s)
@@ -233,41 +233,41 @@ spec:
 
       resources:
         requests:
-          cpu: "800m"
-          memory: "1.5Gi"
+          cpu: "780m"
+          memory: "1.8Gi"
           ephemeral-storage: "5Gi"  
 
-  # prepare some histograms to check the output content
-  # the files are not merged, they are "chained" for ROOT
-  - name: plot-template   
+  # # prepare some histograms to check the output content
+  # # the files are not merged, they are "chained" for ROOT
+  # - name: plot-template   
    
-    inputs:
-      parameters:
-      - name: bucket
-      artifacts:
-      - name: bucket-input
-        path: /code/scatter
-        gcs:
-          bucket: "{{inputs.parameters.bucket}}"
-          key: pfnano/scatter
-    outputs:
-      artifacts:
-      - name: plots
-        path: /code/plots
-        archive:
-          none: {}
-        gcs:
-          bucket: "{{inputs.parameters.bucket}}"
-          key: pfnano/plots/
-    script:
-      image: rootproject/root:latest
-      command: [bash]
-      source: | 
-        ls -l /code/scatter
-        curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/makechain.sh
-        curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/pfplots.C
-        source makechain.sh "/code/scatter/*.root" > mychain.C
-        root -b -l -q mychain.C pfplots.C
-        mkdir /code/plots
-        mv *.png /code/plots
+  #   inputs:
+  #     parameters:
+  #     - name: bucket
+  #     artifacts:
+  #     - name: bucket-input
+  #       path: /code/scatter
+  #       gcs:
+  #         bucket: "{{inputs.parameters.bucket}}"
+  #         key: pfnano/scatter
+  #   outputs:
+  #     artifacts:
+  #     - name: plots
+  #       path: /code/plots
+  #       archive:
+  #         none: {}
+  #       gcs:
+  #         bucket: "{{inputs.parameters.bucket}}"
+  #         key: pfnano/plots/
+  #   script:
+  #     image: rootproject/root:latest
+  #     command: [bash]
+  #     source: | 
+  #       ls -l /code/scatter
+  #       curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/makechain.sh
+  #       curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/pfplots.C
+  #       source makechain.sh "/code/scatter/*.root" > mychain.C
+  #       root -b -l -q mychain.C pfplots.C
+  #       mkdir /code/plots
+  #       mv *.png /code/plots
         
