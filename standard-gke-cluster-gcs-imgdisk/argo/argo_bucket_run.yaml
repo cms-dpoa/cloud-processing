@@ -19,7 +19,7 @@ spec:
     - name: nJobs
       #FIXME 
       # Number of jobs the processing workflow should be split into
-      value: <N_JOBS> 
+      value: <N_JOBS>
     - name: bucket
       #FIXME 
       # Name of cloud storage bucket for storing outputs
@@ -192,6 +192,13 @@ spec:
         gcs:
           bucket: "{{inputs.parameters.bucket}}"
           key: pfnano/scatter/
+      - name: logs
+        path: /code/logs
+        archive:
+          none: {}
+        gcs:
+          bucket: "{{inputs.parameters.bucket}}"
+          key: pfnano/logs/
     script: 
       image: ghcr.io/katilp/pfnano-image-build:main
       command: [bash]
@@ -199,6 +206,7 @@ spec:
         
         # sudo chown $USER /mnt/vol
         mkdir /code/scatter
+        mkdir /code/logs
         source /opt/cms/entrypoint.sh
         eval `scramv1 runtime -sh`
         # git clone https://github.com/cms-opendata-analyses/PFNanoProducerTool.git PhysicsTools/PFNano
@@ -221,14 +229,16 @@ spec:
         sed -i '/process.options.num/s/^/#/g' pfnano_data_2016UL_OpenData_cloud.py
         sed -i "/process.load('FWCore.MessageService.MessageLogger_cfi')/a process.MessageLogger.cerr.FwkReport.reportEvery = 500" pfnano_data_2016UL_OpenData_cloud.py
         sed -i "/from Configuration.AlCa.GlobalTag import GlobalTag/a process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/106X_dataRun2_v37.db')" pfnano_data_2016UL_OpenData_cloud.py
+        #sed -i "/Customisation from command line/a process.add_(cms.Service("SiteLocalConfigService", overrideSourceTimeout = cms.untracked.uint32(6*60)))" pfnano_data_2016UL_OpenData_cloud.py
 
         cms_start_time=$(date +%s)
-        cmsRun pfnano_data_2016UL_OpenData_cloud.py $firstFile $lastFile '"/code/filelist/files_{{inputs.parameters.recid}}.txt"' $eventsInJob
+        cmsRun pfnano_data_2016UL_OpenData_cloud.py $firstFile $lastFile '"/code/filelist/files_{{inputs.parameters.recid}}.txt"' $eventsInJob  2>&1 | tee $it.logs
         cms_end_time=$(date +%s)
         job_duration=$((cms_end_time - cms_start_time))
         echo "Job duration: Job $it took $(date -u -d @${job_duration} +'%H:%M:%S') to complete."
         echo -e "Output file info: $(ls -lh nano_data2016.root)"
         
+        cp $it.logs /code/logs
         mv nano_data2016.root /code/scatter/pfnanooutput$it.root
 
       resources:
