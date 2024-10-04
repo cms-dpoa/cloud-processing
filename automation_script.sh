@@ -9,6 +9,7 @@
 # The following contains paths for the terraform config files,
 # workflow file and namespace to use
 TERRAFORM_DIR="standard-gke-cluster-gcs"
+START_WORKFLOW="argo/argo_bucket_start.yaml"
 WORKFLOW_FILE="argo/argo_bucket_run.yaml"
 NAMESPACE="argo"
 
@@ -19,14 +20,15 @@ PROJECT_ID=""
 REGION="europe-north1-b"
 TIMESTAMP=$(date +'%y%m%d-%H-%M')
 CLUSTER_NAME="cluster-$TIMESTAMP"
-NUM_NODES="3"
-MACHINE_TYPE="e2-standard-4"
-NODE_DISK_TYPE="pd-ssd"
+NUM_NODES=3
+MACHINE_TYPE="e2-custom-32-65536"
+NODE_DISK_TYPE="pd-standard"
+NODE_DISK_SIZE=500
 
-# Dataset variables
-RECID="30544"
-NUM_EVENTS="30000"
-NUM_JOBS="12"
+# Workflow variables
+RECID=
+NUM_EVENTS=1000000
+NUM_JOBS=96
 
 # Set a value for nfs disk type if using the nfs cluster, e.g. "pd-standard" or "pd-ssd"
 # If using the gcs (google cloud storage) bucket workflow, enter the name of your bucket
@@ -34,33 +36,30 @@ NFS_DISK_TYPE=""
 BUCKET_NAME=""
 SERVICE_ACC_FILE=""
 
-# From this point, the actual script starts, first filling in variables from above into terraform.tfvars
-# and the argo workflow, to customise the number of jobs and how many events should be processed
-
-# Change the directory to the one containing the terraform configuration files
-cd "${TERRAFORM_DIR}"
-
-# Insert the variable values into the placeholders in terraform.tfvars
-sed -i.bak -e "s/<PROJECT_ID>/$PROJECT_ID/" -e "s/<REGION>/$REGION/" -e "s/<NAME>/$TIMESTAMP/" \
-    -e "s/<NUM_NODES>/$NUM_NODES/" -e "s/<MACHINE_TYPE>/$MACHINE_TYPE/" \
-    -e "s/<NODE_DISK_TYPE>/$NODE_DISK_TYPE/" -e "s/<NFS_DISK_TYPE>/$NFS_DISK_TYPE/" \
-    -e "s/<SERVICE_ACCOUNT_FILE>/$SERVICE_ACC_FILE/" "terraform.tfvars"
-
-# Insert the variable values into the argo workflow
-sed -i.bak -e "s/<NAME>/$TIMESTAMP/" -e "s/<RECID>/$RECID/" \
-    -e "s/<N_EVENTS>/$NUM_EVENTS/" -e "s/<N_JOBS>/$NUM_JOBS/" \
-    -e "s/<N_NODES>/$NUM_NODES/" -e "s/<BUCKET_NAME>/$BUCKET_NAME/" "${WORKFLOW_FILE}"
+# From this point, the functions for the script are defined
+# first creating a terraform planfile to deploy resources according to specifications
 
 # Function to deploy the cluster and other cloud resources using Terraform
 deploy_resources() {
     echo "Deploying resources with Terraform..."
     terraform init
-    terraform apply -auto-approve
+    terraform plan \
+    -var "project_id=$PROJECT_ID" \
+    -var "region=$REGION" \
+    -var "name=$TIMESTAMP" \
+    -var "gke_num_nodes=$NUM_NODES" \
+    -var "gke_machine_type=$MACHINE_TYPE" \
+    -var "gke_node_disk_type=$NODE_DISK_TYPE" \
+    -var "gke_node_disk_size=$NODE_DISK_SIZE" \
+    -var "persistent_disk_type=${NFS_DISK_TYPE:-}" \
+    -var "service_acc=${SERVICE_ACC_FILE:-}" \
+    -out=tfplan || { echo "Terraform plan failed"; return 1; }
+
+    terraform apply -auto-approve tfplan || { echo "Terraform apply failed"; return 1; }
 }
 
 prepare_cluster() {
     echo "Setting up cluster..."
-    echo "Current timestamp: $TIMESTAMP"
     gcloud container clusters get-credentials $CLUSTER_NAME --region $REGION
 
     # Quickstart version for argo, not meant for use in production
@@ -75,10 +74,28 @@ prepare_cluster() {
     echo "Cluster preparation complete."
 }
 
+# Function to run the start workflow to initialise the nodes before running the main job
+run_start_workflow() {
+    echo "Submitting Argo start workflow..."
+    argo submit -n $NAMESPACE $START_WORKFLOW \
+    -p nEvents=1000 \
+    -p recid=$RECID \
+    -p nJobs=$NUM_NODES \
+    -p bucket=$BUCKET_NAME \
+    -p claimName="nfs-$TIMESTAMP"
+}
+
 # Function to run Argo workflow
 run_argo_workflow() {
+    # Deleting previous workflow from the list of workflows
+    argo delete -n $NAMESPACE @latest
     echo "Submitting Argo workflow..."
-    argo submit -n $NAMESPACE $WORKFLOW_FILE
+    argo submit -n $NAMESPACE $WORKFLOW_FILE \
+    -p nEvents=$NUM_EVENTS \
+    -p recid=$RECID \
+    -p nJobs=$NUM_JOBS \
+    -p bucket=$BUCKET_NAME \
+    -p claimName="nfs-$TIMESTAMP"
 }
 
 # Function to monitor Argo workflow
@@ -89,14 +106,16 @@ monitor_workflow() {
     # Counter to check the status after a certain time interval (default: 10 seconds)
     # Prints current status when counter exceeds the print interval (default: 300 seconds)
     COUNTER=0
-    CHECK_INTERVAL=10  
+    CHECK_INTERVAL=10
     PRINT_INTERVAL=300
 
     while true; do
-        STATUS=$(argo get $WORKFLOW_NAME -n argo | grep "Status:" | awk '{print $2}')
+        STATUS=$(argo get $WORKFLOW_NAME -n $NAMESPACE | grep "Status:" | awk '{print $2}')
         
         if [[ $STATUS == "Succeeded" ]]; then
-            echo "Workflow completed successfully."
+            echo -e "\nWorkflow completed successfully."
+            WF_TIME=$(argo get @latest -n $NAMESPACE | grep -m 1 "Duration:" | awk '{$1=""; print $0}')
+            echo "Workflow took $WF_TIME to complete."
             echo -e "\e[32m`date +%r`\e[39m\n"
             break
         elif [[ $STATUS == "Failed" || $STATUS == "Error" ]]; then
@@ -104,15 +123,16 @@ monitor_workflow() {
             echo -e "\e[32m`date +%r`\e[39m\n"
             break
         elif (( COUNTER >= PRINT_INTERVAL )); then
-
             # Print status and current time
-            echo "Current status: $STATUS"
+            echo -e "\nCurrent status: $STATUS"
             echo -e "\e[32m`date +%r`\e[39m\n"
-
+            # Monitor resource usage
+            kubectl top nodes
+            kubectl get pods -o wide -n $NAMESPACE | grep runpfnano | awk '$3 == "Running" {print $7}' | sort | uniq -c | awk '{print  $1" job(s) running on: "$2}'
             # Reset counter
             COUNTER=0
         fi
-    
+        # Wait for a bit before rechecking the status
         sleep $CHECK_INTERVAL
         COUNTER=$((COUNTER+CHECK_INTERVAL))
     done
@@ -133,13 +153,15 @@ log_workflow_details() {
     
     # Get the complete logs for all pods (might be too much when processing a whole dataset)
     ARGO_LOGS=$(argo logs -n $NAMESPACE $WORKFLOW_NAME)
+    ARGO_WF=$(argo get -n $NAMESPACE $WORKFLOW_NAME)
 
     # Extract job duration and timestamps for archiving to bucket from pod logs
     JOB_TIMES=$(echo "$ARGO_LOGS" | grep -A 1 "Job duration:")
     ARCHIVING_TIMES=$(echo "$ARGO_LOGS" | grep -A 1 "level=info msg=\"Taring")
 
     # Save the job duration and archiving information separately
-    echo -e "Job duration per job:\n" > $LOG_FILE
+    echo -e "Time taken for argo start workflow & pod initialisation: $START_WF_TIME\n" > $LOG_FILE
+    echo -e "Job duration per job:\n" >> $LOG_FILE
     echo "$JOB_TIMES" >> $LOG_FILE
 
     echo -e "\nArchiving step after job completion:\n" >> $LOG_FILE
@@ -152,36 +174,57 @@ log_workflow_details() {
     # Store workflow and cluster information
     echo -e "Cluster configuration:\n" > $CONFIG_FILE
     echo -e "Workflow: $WORKFLOW_FILE" >> $CONFIG_FILE
-    cat "terraform.tfvars" >> $CONFIG_FILE
+    echo "project_id=$PROJECT_ID" >> $CONFIG_FILE
+    echo "region=$REGION" >> $CONFIG_FILE
+    echo "name=$TIMESTAMP" >> $CONFIG_FILE
+    echo "gke_num_nodes=$NUM_NODES" >> $CONFIG_FILE
+    echo "gke_machine_type=$MACHINE_TYPE" >> $CONFIG_FILE
+    echo "gke_node_disk_type=$NODE_DISK_TYPE" >> $CONFIG_FILE
+    echo "gke_node_disk_size=$NODE_DISK_SIZE" >> $CONFIG_FILE
+    echo "persistent_disk_type=${NFS_DISK_TYPE:-}" >> $CONFIG_FILE
+    echo "service_acc=${SERVICE_ACC_FILE:-}" >> $CONFIG_FILE
 
     # Get workflow info
     echo -e "\n" >> $CONFIG_FILE
-    argo get -n $NAMESPACE $WORKFLOW_NAME >> $CONFIG_FILE
+    echo "$ARGO_WF" >> $CONFIG_FILE
 }
 
 # Destroy resources using terraform
 destroy_resources() {
     echo "Destroying resources with Terraform..."
-    argo delete -n $NAMESPACE @latest
+    argo delete --all -n $NAMESPACE
     kubectl delete all --all
-    terraform destroy -auto-approve
-}
-
-# Revert terraform.tfvars and argo workflow to the original state
-# to restore the placeholders
-reset_files() {
-    # Restore original terraform file and argo workflow file from backups
-    cp "terraform.tfvars.bak" "terraform.tfvars"
-    cp "${WORKFLOW_FILE}.bak" "${WORKFLOW_FILE}"
-    cd ".."
+    terraform destroy -auto-approve \
+    -var "project_id=$PROJECT_ID" \
+    -var "region=$REGION" \
+    -var "name=$TIMESTAMP" \
+    -var "gke_num_nodes=$NUM_NODES" \
+    -var "gke_machine_type=$MACHINE_TYPE" \
+    -var "gke_node_disk_type=$NODE_DISK_TYPE" \
+    -var "gke_node_disk_size=$NODE_DISK_SIZE" \
+    -var "persistent_disk_type=${NFS_DISK_TYPE:-}" \
+    -var "service_acc=${SERVICE_ACC_FILE:-}" \
+    || { echo "Terraform destroy failed"; return 1; }
 }
 
 # Main script execution
+
+# The start workflow is optional, but it's advisable to run it to initialise pods
+# resulting in more consistent comparisons for the actual run afterwards
+
+# Move to the directory with the terraform configuration files
+cd "${TERRAFORM_DIR}"
+
 deploy_resources
 prepare_cluster
+run_start_workflow
+monitor_workflow
+# Save the duration of the start workflow
+START_WF_TIME=$WF_TIME
 run_argo_workflow
 monitor_workflow
 log_workflow_details
 destroy_resources
-reset_files
-echo "Automation script completed."
+cd ".."
+
+echo "Automation script finished."

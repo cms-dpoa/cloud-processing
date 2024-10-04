@@ -31,3 +31,21 @@ variable "name" {
   description = "Cluster name"
 }
 
+variable "persistent_disk_size" {
+  default     = 100
+  description = "Persistent disk size"
+}
+
+variable "persistent_disk_type" {
+  default = "pd-standard"
+  description = "Persistent disk type"
+}
+
+variable "persistent_claim_storage_request" {
+  default     = "100Gi"
+  description = "Persistent claim storage request"
+}
+
+variable "service_acc" {
+  description = "service account file"
+}
