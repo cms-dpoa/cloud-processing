@@ -10,22 +10,16 @@ spec:
     parameters:
     - name: startFile                                  
       value: 1
-    - name: nEvents   
-      #FIXME 
-      # Number of events in the dataset to be processed                       
+    - name: nEvents                     
       value: <N_EVENTS>
     - name: recid
-      #FIXME
-      # Record id of the dataset to be processed
       value: <RECID>
     - name: nJobs
-      #FIXME 
-      # Number of jobs the processing workflow should be split into
       value: <N_JOBS>
     - name: bucket
-      #FIXME 
-      # Name of cloud storage bucket for storing outputs
       value: <BUCKET_NAME>
+    - name: claimName
+      value: nfs-<NAME>
 
   templates:
   - name: cms-od-example
@@ -124,7 +118,7 @@ spec:
       source: |
         mkdir bucket
         cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd > bucket/files_{{inputs.parameters.recid}}.txt;
-        awk -F/ '{ printf "file:/code/files/"; print $NF }' bucket/files_{{inputs.parameters.recid}}.txt > bucket/files_local_{{inputs.parameters.recid}}.txt;
+        awk -F/ '{ printf "root://localhost//code/files/"; print $NF }' bucket/files_{{inputs.parameters.recid}}.txt > bucket/files_local_{{inputs.parameters.recid}}.txt;
         cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary > /tmp/type.txt
         nfiles=$(cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files)
         echo $nfiles
@@ -254,6 +248,9 @@ spec:
         echo Check the available space after copying input files
         df -h
 
+        # Set up local xrootd server
+        xrootd -l - -b /code 
+
         sed -i '/process.options.num/s/^/#/g' pfnano_data_2016UL_OpenData_cloud.py
         sed -i "/process.load('FWCore.MessageService.MessageLogger_cfi')/a process.MessageLogger.cerr.FwkReport.reportEvery = 500" pfnano_data_2016UL_OpenData_cloud.py
         sed -i "/from Configuration.AlCa.GlobalTag import GlobalTag/a process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/106X_dataRun2_v37.db')" pfnano_data_2016UL_OpenData_cloud.py
@@ -276,7 +273,7 @@ spec:
       resources:
         requests:
           cpu: "800m"
-          memory: "2.3Gi"
+          memory: "1.7Gi"
           ephemeral-storage: "5Gi" 
      
 
@@ -306,6 +303,8 @@ spec:
       image: rootproject/root:latest
       command: [bash]
       source: | 
+        echo "Current time: $(date -u +"%Y-%m-%dT%H:%M:%S")"
+        echo "Completed processing the files, creating plots."
         ls -l /code/scatter
         curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/makechain.sh
         curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/pfplots.C
