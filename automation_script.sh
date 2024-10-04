@@ -20,15 +20,15 @@ PROJECT_ID=""
 REGION="europe-north1-b"
 TIMESTAMP=$(date +'%y%m%d-%H-%M')
 CLUSTER_NAME="cluster-$TIMESTAMP"
-NUM_NODES="3"
+NUM_NODES=3
 MACHINE_TYPE="e2-custom-32-65536"
 NODE_DISK_TYPE="pd-standard"
 NODE_DISK_SIZE=500
 
 # Workflow variables
-RECID=""
-NUM_EVENTS="1000000"
-NUM_JOBS="96"
+RECID=
+NUM_EVENTS=1000000
+NUM_JOBS=96
 
 # Set a value for nfs disk type if using the nfs cluster, e.g. "pd-standard" or "pd-ssd"
 # If using the gcs (google cloud storage) bucket workflow, enter the name of your bucket
