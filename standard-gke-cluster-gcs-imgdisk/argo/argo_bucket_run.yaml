@@ -11,7 +11,7 @@ spec:
     - name: nEvents   
       #FIXME 
       # Number of events in the dataset to be processed (-1 is all)                     
-      value: -1
+      value: 1000
     - name: recid
       #FIXME
       # Record id of the dataset to be processed
@@ -80,17 +80,19 @@ spec:
             value: "{{item.eventsinjob}}"
         withParam: "{{tasks.joblist.outputs.result}}"
       
-      # - name: plot
-      #   dependencies: [runpfnano]
-      #   template: plot-template
-      #   arguments:
-      #    parameters:
-      #     - name: bucket
-      #       value: "{{inputs.parameters.bucket}}"
+      - name: plot
+        dependencies: [runpfnano]
+        template: plot-template
+        arguments:
+         parameters:
+          - name: recid
+            value: "{{inputs.parameters.recid}}"
+          - name: bucket
+            value: "{{inputs.parameters.bucket}}"
 
   # Get the metadata of the dataset
   # Accidentally showing three different ways of passing parameters/files btw the steps
-  # - the full list of files: write it to a file on the common disk mounted on /mnt/vol
+  # - the full list of files: write it to a file in the GCS bucket
   # - the type of data: write it to the step's ouput parameter "{{tasks.get-metadata.outputs.parameters.dataType}}#   (through a temporary file /tmp/type.txt)
   # - the total number of files which is the stdout output of this step and goes to {{tasks.get-metadata.outputs.result}}
   - name: get-metadata-template
@@ -109,7 +111,7 @@ spec:
         path: bucket
         gcs:
           bucket: "{{inputs.parameters.bucket}}"
-          key: pfnano/files_{{inputs.parameters.recid}}.txt
+          key: pfnano/{{inputs.parameters.recid}}/files_{{inputs.parameters.recid}}.txt
     script:
       image: cernopendata/cernopendata-client
       command: [bash]
@@ -182,7 +184,7 @@ spec:
         path: /code/filelist
         gcs:
           bucket: "{{inputs.parameters.bucket}}"
-          key: pfnano/files_{{inputs.parameters.recid}}.txt
+          key: pfnano/{{inputs.parameters.recid}}/files_{{inputs.parameters.recid}}.txt
     outputs:
       artifacts:
       - name: filelist
@@ -191,16 +193,16 @@ spec:
           none: {}
         gcs:
           bucket: "{{inputs.parameters.bucket}}"
-          key: pfnano/scatter/
+          key: pfnano/{{inputs.parameters.recid}}/scatter/
       - name: logs
         path: /code/logs
         archive:
           none: {}
         gcs:
           bucket: "{{inputs.parameters.bucket}}"
-          key: pfnano/logs/
+          key: pfnano/{{inputs.parameters.recid}}/logs/
     script: 
-      image: ghcr.io/katilp/pfnano-image-build:main
+      image: ghcr.io/cms-dpoa/pfnano-image-build:main
       command: [bash]
       source: | 
         
@@ -247,37 +249,38 @@ spec:
           memory: "1.8Gi"
           ephemeral-storage: "5Gi"  
 
-  # # prepare some histograms to check the output content
-  # # the files are not merged, they are "chained" for ROOT
-  # - name: plot-template   
+  # prepare some histograms to check the output content
+  # the files are not merged, they are "chained" for ROOT
+  - name: plot-template   
    
-  #   inputs:
-  #     parameters:
-  #     - name: bucket
-  #     artifacts:
-  #     - name: bucket-input
-  #       path: /code/scatter
-  #       gcs:
-  #         bucket: "{{inputs.parameters.bucket}}"
-  #         key: pfnano/scatter
-  #   outputs:
-  #     artifacts:
-  #     - name: plots
-  #       path: /code/plots
-  #       archive:
-  #         none: {}
-  #       gcs:
-  #         bucket: "{{inputs.parameters.bucket}}"
-  #         key: pfnano/plots/
-  #   script:
-  #     image: rootproject/root:latest
-  #     command: [bash]
-  #     source: | 
-  #       ls -l /code/scatter
-  #       curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/makechain.sh
-  #       curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/pfplots.C
-  #       source makechain.sh "/code/scatter/*.root" > mychain.C
-  #       root -b -l -q mychain.C pfplots.C
-  #       mkdir /code/plots
-  #       mv *.png /code/plots
+    inputs:
+      parameters:
+      - name: recid      
+      - name: bucket
+      artifacts:
+      - name: bucket-input
+        path: /code/scatter
+        gcs:
+          bucket: "{{inputs.parameters.bucket}}"
+          key: pfnano/{{inputs.parameters.recid}}/scatter
+    outputs:
+      artifacts:
+      - name: plots
+        path: /code/plots
+        archive:
+          none: {}
+        gcs:
+          bucket: "{{inputs.parameters.bucket}}"
+          key: pfnano/{{inputs.parameters.recid}}/plots/
+    script:
+      image: rootproject/root:latest
+      command: [bash]
+      source: | 
+        ls -l /code/scatter
+        curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/makechain.sh
+        curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/pfplots.C
+        source makechain.sh "/code/scatter/*.root" > mychain.C
+        root -b -l -q mychain.C pfplots.C
+        mkdir /code/plots
+        mv *.png /code/plots
         

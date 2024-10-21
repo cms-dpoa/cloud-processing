@@ -29,6 +29,7 @@ resource "google_container_node_pool" "cluster1_nodes" {
     machine_type = var.gke_machine_type
     disk_size_gb = var.gke_node_disk_size
     disk_type    = var.gke_node_disk_type
+
     gcfs_config {
       enabled = true
     }
@@ -42,5 +43,11 @@ resource "google_container_node_pool" "cluster1_nodes" {
     labels = {
       env = var.project_id
     }
+  }
+
+  autoscaling {
+    min_node_count  = 1
+    max_node_count  = var.gke_num_nodes
+    location_policy       = "ANY"
   }
 }
