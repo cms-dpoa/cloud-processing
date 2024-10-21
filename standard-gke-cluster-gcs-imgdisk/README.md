@@ -1,9 +1,11 @@
 ## Terraform scripts for a GKE Standard Cluster with a Google Cloud Storage (GCS) bucket and a secondary boot disk
 
+
+[Tutorial](https://cms-opendata-workshop.github.io/tutorial-lesson-cloud-processing-gcp/)
+
 ### Prerequisites
 
-
-Install `gcloud` installed
+Install `gcloud`.
 
 Have a GCP project available, check them with
 
@@ -68,27 +70,18 @@ With gcloud CLI, buckets can be created as following:
 gcloud storage buckets create gs://<BUCKET_NAME> --location=<BUCKET_LOCATION>
 ```
 
-To use the bucket, a service account and IAM policy binding have to be set up:
-
-1. Setting up service account:
-```
-gcloud iam service-accounts create bucket-access --project <project-name>
-```
-2. Creating IAM policy binding:
-```
-gcloud projects add-iam-policy-binding <project-name> --member "serviceAccount:bucket-access@<project-name>.iam.gserviceaccount.com" --role "roles/storage.objectAdmin"
-```
-
 More information can be found here: https://cloud.google.com/storage/docs/creating-buckets#storage-create-bucket-cli
 
 
 ### Create the cluster
 
-Set `project_id`, `region` and `name` in `terraform.tfvars` to the desired values.
+Set `project_id`, `region`, `name` and `gke_num_nodes` in `terraform.tfvars` to the desired values.
 The `project_id` is the id of your GCP project and can be found via gcloud CLI command `gcloud projects list` or in the Google Cloud console when selecting a project.
-As of now, Google cloud requires a zone rather than a region, so choose a zone for the `region`-variable.
+Choose a zone for the `region`-variable.
 A zone is usually just the region name followed by -a,-b or -c, i.e. `us-west1-a` instead of `us-west1`.
 See regions and zones here: https://cloud.google.com/compute/docs/regions-zones
+
+If you use a region without zone, the cluster will have the requested number of nodes in each of the zones.
 
 The `name`-variable will be used to set the name of the gke cluster and other resources as in the following example: 
 
@@ -124,11 +117,6 @@ gcloud container clusters get-credentials <CLUSTER_NAME> --region <REGION> --pro
 
 The cluster name is `cluster-<NAME>` where `<NAME>` is `name` as defined in `terraform.tfvars`.
 
-Enable image streaming so that image can be read from the secondary boot disk prepared above.
-
-```
-gcloud container clusters update cluster-<NAME> --zone <REGION> --enable-image-streaming
-```
 
 Use `kubectl` to inspect the cluster, e.g.
 
@@ -172,6 +160,14 @@ Submit the job with this command after changing the filename to the desired work
 argo submit argo_bucket_run.yaml -n argo 
 ```
 
+### Delete the cluster
+
+Delete the cluster with
+
+```
+terraform destroy
+```
+
 ### Download the output files
 Once the workflow is completed, the output files are transferred to the storage bucket.
 The files can be downloaded to a local machine either from within the google cloud console or with the following command:
@@ -186,12 +182,4 @@ gsutil -m rm gs://<BUCKET_NAME>/**
 Alternatively, the bucket can be completely deleted with:
 ```
 gcloud storage rm --recursive gs://<BUCKET_NAME>
-```
-
-### Destroy the resources
-
-Destroy resources with
-
-```
-terraform destroy
 ```
