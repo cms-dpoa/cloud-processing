@@ -8,27 +8,20 @@ spec:
   volumes:
   - name: task-pv-storage
     persistentVolumeClaim:
-      #FIXME
-      # Name of the nfs disk created by terraform
-      claimName: nfs-<NAME>
+      claimName: "{{workflow.parameters.claimName}}"
 
   arguments:
     parameters:
     - name: startFile                                  
       value: 1
-    - name: nEvents   
-      #FIXME 
-      # Number of events in the dataset to be processed                       
+    - name: nEvents                               
       value: <N_EVENTS>
     - name: recid
-      #FIXME
-      # Record id of the dataset to be processed
       value: <RECID>
     - name: nJobs
-      #FIXME 
-      # Number of jobs the processing workflow should be split into
       value: <N_JOBS>
-    
+    - name: claimName
+      value: nfs-<NAME>
 
   templates:
   - name: cms-od-example
@@ -228,5 +221,5 @@ spec:
       resources:
         requests:
           cpu: "800m"
-          memory: "2.3Gi"
+          memory: "1.7Gi"
           ephemeral-storage: "5Gi"  

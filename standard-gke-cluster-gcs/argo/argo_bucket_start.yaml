@@ -13,16 +13,13 @@ spec:
     - name: nEvents                               
       value: 1000
     - name: recid
-      #FIXME
-      # Record id of the dataset to be processed
       value: <RECID>
     - name: nJobs
-      value: <N_NODES>
+      value: <N_JOBS>
     - name: bucket
-      #FIXME 
-      # Name of cloud storage bucket for storing outputs
       value: <BUCKET_NAME>
-    
+    - name: claimName
+      value: nfs-<NAME>
 
   templates:
   - name: cms-od-example
@@ -258,6 +255,8 @@ spec:
       image: rootproject/root:latest
       command: [bash]
       source: | 
+        echo "Current time: $(date -u +"%Y-%m-%dT%H:%M:%S")"
+        echo "Completed processing the files, creating plots."
         ls -l /code/scatter
         curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/makechain.sh
         curl -LO https://raw.githubusercontent.com/katilp/simple-root-chain-builder/main/pfplots.C
